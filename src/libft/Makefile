@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 19:14:44 by lzipp             #+#    #+#              #
-#    Updated: 2023/10/13 13:34:57 by lzipp            ###   ########.fr        #
+#    Updated: 2023/12/08 13:43:49 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ ft_strlcpy.c\
 ft_strlen.c\
 ft_strmapi.c\
 ft_strncmp.c\
+ft_strrncmp.c\
 ft_strrchr.c\
 ft_strnstr.c\
 ft_strtrim.c\

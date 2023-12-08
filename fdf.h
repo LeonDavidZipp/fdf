@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2023/12/08 11:33:29 by lzipp            ###   ########.fr       */
+/*   Updated: 2023/12/08 13:54:42 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <fcntl.h>
 
-struct s_point {
+typedef struct s_point {
 	int		x;
 	int		y;
 	int		z;
 	int		color;
 }	t_point;
 
-struct s_map {
-	s_point	**rows;
-} t_map;
+typedef struct s_map {
+	t_point	**rows;
+}	t_map;
 
 # define WIDTH 1920
 # define HEIGHT 1080
