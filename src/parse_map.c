@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2023/12/08 13:48:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2023/12/08 15:35:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,50 @@ static t_point	*make_point(int x, int y, int z, int color)
 	return (point);
 }
 
+static char	*get_lines(int fd, int *row_num)
+{
+	char	*line;
+	char	*lines;
+	char	*temp;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (NULL);
+	lines = ft_strjoin("", line);
+	free(line);
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		temp = ft_strjoin(lines, line);
+		free(lines);
+		free(line);
+		if (!temp)
+			return (NULL);
+		lines = ft_strdup(temp);
+		free(temp);
+		if (!lines)
+			return (NULL);
+		row_num++;
+	}
+	return (lines);
+}
+
 char	*read_file(char *file_name)
 {
 	int		fd;
+	int		row_num;
 	char	*line;
 	char	*lines;
+	char	*temp;
 
 	fd = open(file_name, O_RDONLY);
-	if (ft_strrncmp(file_name, ".fdf", 4) != 0 || fd < 0);
+	if (ft_strrncmp(file_name, ".fdf", 4) != 0 || fd < 0)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		exit(1);
 	}
-	map_string = ft_strdup("");
-	while (get_next_line(fd, &line))
-	{
-		map = ft_strjoin(map, line);
-		map = ft_strjoin(map, "\n");
-	}
-	close(fd);
-	// spacer
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
 	row_num = 1;
 	line = get_next_line(fd);
 	lines = ft_strjoin("", line);
@@ -64,7 +85,7 @@ char	*read_file(char *file_name)
 		row_num++;
 	}
 	close(fd);
-	return (map);
+	return (lines);
 }
 
 t_map	make_map(int fd)

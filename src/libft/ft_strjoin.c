@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 11:32:48 by lzipp             #+#    #+#             */
-/*   Updated: 2023/10/18 17:56:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2023/12/08 15:17:39 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	result[len1 + len2] = '\0';
 	return (result);
 }
+
 // #include <stdio.h>
 // #include <stdlib.h>
 // #include <string.h>
