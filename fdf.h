@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2023/12/08 13:54:42 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 13:32:34 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_point {
 
 typedef struct s_map {
 	t_point	**rows;
+	int		width;
+	int		height;
 }	t_map;
 
 # define WIDTH 1920
