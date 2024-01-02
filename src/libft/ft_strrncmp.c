@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:00:57 by lzipp             #+#    #+#             */
-/*   Updated: 2023/12/08 13:42:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 13:08:29 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	ft_strrncmp(const char *s1, const char *s2, size_t n)
 		}
 		--n;
 	}
-	printf("ind1: %d, letter: %c\n", ind1, s1[ind1]);
-	printf("ind2: %d, letter: %c\n", ind2, s2[ind2]);
 	return ((int)(*(unsigned char *)&s1[ind1] - *(unsigned char *)&s2[ind2]));
 }
 
