@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/02 13:24:54 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 13:27:20 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*get_lines(int fd, int *row_num)
 	return (lines);
 }
 
-char	*read_file(char *file_name)
+char	*read_lines_from_file(char *file_name)
 {
 	int		fd;
 	int		row_num;

@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/02 09:56:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 13:56:43 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,39 @@ static t_point	*make_point(int x, int y, int z, int color)
 	return (point);
 }
 
-static t_point	**make_map(char **lines)
+static t_point	make_row(int width)
 {
-	;
+	
+}
+
+static int	get_width(char *lines)
+{
+	int		len;
+	int		i;
+
+	i = 0;
+	while (lines[i + 1] && lines[i + 1] != '\n')
+	{
+		if (lines[i] == ' ' && lines[i + 1] != ' ' && lines[i + 1] != '\n')
+			len++;
+		i++;
+	}
+	return (len);
+}
+
+t_map	make_map(char *filename)
+{
+	char	*lines;
+	t_map	map;
+
+	lines = read_lines_from_file(filename);
+	if (!lines)
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+	map.width = get_width(lines);
+	map.height = get_height(lines);
 }
 
 t_map	make_map(int fd)
