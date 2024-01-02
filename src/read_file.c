@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/02 10:48:07 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 10:51:13 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*read_file(char *file_name)
 {
 	int		fd;
 	int		row_num;
-	char	*lines; 
+	char	*lines;
 	char	*line;
 
 	fd = open(file_name, O_RDONLY);
