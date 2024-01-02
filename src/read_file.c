@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/02 13:21:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 13:24:54 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*read_file(char *file_name)
 // {
 // 	char	*lines;
 
-// 	lines = read_file("/Users/lzipp/Desktop/42curriculum/fdf/test_maps/10-2.fd");
+// 	lines = read_file("/Users/lzipp/Desktop/42curriculum/fdf/test_maps/42.fdf");
 // 	printf("%s\n", lines);
 // 	return (0);
 // }
