@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/02 13:07:42 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/02 13:21:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static char	*get_lines(int fd, int *row_num)
 			return (NULL);
 		*row_num += 1;
 	}
-	// *row_num = *row_num - 1; //REMOVE!!!
 	return (lines);
 }
 
@@ -71,13 +70,12 @@ char	*read_file(char *file_name)
 	close(fd);
 	return (lines);
 }
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*lines;
 
-#include <stdio.h>
-int	main(void)
-{
-	char	*lines;
-
-	lines = read_file("/Users/lzipp/Desktop/42curriculum/fdf/test_maps/10-2.fd");
-	printf("%s\n", lines);
-	return (0);
-}
+// 	lines = read_file("/Users/lzipp/Desktop/42curriculum/fdf/test_maps/10-2.fd");
+// 	printf("%s\n", lines);
+// 	return (0);
+// }
