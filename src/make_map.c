@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 16:46:10 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/06 17:35:51 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_map	*make_map(char *filename)
 	while (values[i])
 	{
 		col = 0;
-		while (values[i] != '\n')
+		while (values[i][1] != '\n')
 		{
 			map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
 			if (!map->rows[row])
@@ -102,7 +102,9 @@ int main() {
         // Print the map
         for (int i = 0; i < map->height; i++) {
             for (int j = 0; j < map->width; j++) {
-                printf("%d ", map->rows[i][j]);
+                printf("x: %d \n", map->rows[i][j].x);
+				printf("y: %d \n", map->rows[i][j].y);
+				printf("z: %d \n", map->rows[i][j].z);
             }
             printf("\n");
         }
