@@ -6,72 +6,40 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 15:07:59 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/06 15:12:43 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-// static t_point	*make_point(int x, int y, int z, int color)
-// {
-// 	t_point		*point;
-
-// 	point = ft_calloc(1, sizeof(t_point));
-// 	point->x = x;
-// 	point->y = y;
-// 	point->z = z;
-// 	point->color = color;
-// 	return (point);
-// }
-
-// static t_point	make_row(int width)
-// {
-// 	;
-// }
-
-#include <stdio.h>
-static int	get_width(char *lines)
+static t_point	*make_point(int x, int y, int z, int color)
 {
-	int		i;
-	int		len;
+	t_point		*point;
 
-	i = 0;
-	len = 0;
-	while (lines[i + 1] != '\0')
+	point = ft_calloc(1, sizeof(t_point));
+	point->x = x;
+	point->y = y;
+	point->z = z;
+	point->color = color;
+	return (point);
+}
+
+t_map	*make_map(char *filename)
+{
+	char	*lines;
+	t_map	*map;
+
+	lines = read_lines_from_file(filename);
+	if (!lines)
 	{
-		if (lines[i] == ' ' && lines[i + 1] != ' ')
-			len++;
-		if (lines[i + 1] == '\n')
-		{
-			len++;
-			break;
-		}
-		i++;
+		write(1, "Error\n", 6);
+		exit(1);
 	}
-	return (len);
+	map->width = get_width(lines);
+	map->height = get_height(lines);
+	free(lines);
+	return (map);
 }
-
-int	main(void)
-{
-	printf("%d\n", get_width("1 2 3 4 5 6\n4 5 6\n7 8 9\n"));
-}
-
-// t_map	make_map(char *filename)
-// {
-// 	char	*lines;
-// 	t_map	map;
-
-// 	lines = read_lines_from_file(filename);
-// 	if (!lines)
-// 	{
-// 		write(1, "Error\n", 6);
-// 		exit(1);
-// 	}
-// 	map.width = get_width(lines);
-// 	// other stuff
-// 	map.height = get_height(lines);
-// 	return (map);
-// }
 
 // t_map	make_map(int fd)
 // {
