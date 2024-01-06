@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 16:19:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/06 16:46:10 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_point	*make_point(int x, int y, int z, int color)
 	return (point);
 }
 
-static void		free_values(char **values)
+static void	free_values(char **values)
 {
 	int		i;
 
@@ -89,31 +89,33 @@ t_map	*make_map(char *filename)
 	return (map);
 }
 
-int	main(void)
+#include <stdio.h>
+int main() {
+    char *filename = "../test_maps/10-2.fdf";
+    t_map *map = make_map(filename);
 
-// t_map	make_map(int fd)
-// {
-// 	t_map		map;
-// 	char		*line;
-// 	char		**split_line;
-// 	int			i;
-// 	int			j;
+    if (map) {
+        printf("Map created successfully.\n");
+        printf("Map height: %d\n", map->height);
+        printf("Map width: %d\n", map->width);
 
-// 	map.rows = ft_calloc(1, sizeof(t_point *));
-// 	i = 0;
-// 	while (get_next_line(fd, &line))
-// 	{
-// 		split_line = ft_split(line, ' ');
-// 		map.rows[i] = ft_calloc(ft_arrlen(split_line) + 1, sizeof(t_point));
-// 		j = 0;
-// 		while (split_line[j])
-// 		{
-// 			map.rows[i][j] = *make_point(j, i, ft_atoi(split_line[j]), WHITE);
-// 			j++;
-// 		}
-// 		map.rows[i][j] = *make_point(j, i, 0, WHITE);
-// 		i++;
-// 	}
-// 	map.rows[i] = NULL;
-// 	return (map);
-// }
+        // Print the map
+        for (int i = 0; i < map->height; i++) {
+            for (int j = 0; j < map->width; j++) {
+                printf("%d ", map->rows[i][j]);
+            }
+            printf("\n");
+        }
+
+        // Free the map when done
+        for (int i = 0; i < map->height; i++) {
+            free(map->rows[i]);
+        }
+        free(map->rows);
+        free(map);
+    } else {
+        printf("Failed to create map.\n");
+    }
+
+    return 0;
+}
