@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/02 13:56:43 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/06 12:11:34 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_point	*make_point(int x, int y, int z, int color)
 
 static t_point	make_row(int width)
 {
-	
+	;
 }
 
 static int	get_width(char *lines)
