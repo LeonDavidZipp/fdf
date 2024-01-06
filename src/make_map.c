@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 15:12:43 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/06 16:01:01 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,35 @@ static t_point	*make_point(int x, int y, int z, int color)
 	return (point);
 }
 
+static t_point	*make_row(char *lines, int width, int *i)
+{
+	t_point		*row;
+	int			x;
+	int			y;
+	int			z;
+	char		**split_line;
+
+	row = ft_calloc(width + 1, sizeof(t_point));
+	split_line = ft_split(lines, ' ');
+	while (split_line[*i])
+	{
+		row[*i] = *make_point(i, *i, ft_atoi(split_line[*i]), WHITE);
+		i++;
+	}
+	row[*i] = *make_point(i, *i, 0, WHITE);
+	*i++;
+	return (row);
+}
+
 t_map	*make_map(char *filename)
 {
 	char	*lines;
+	char	**values;
+	int		i;
+	int		row;
+	int		col;
+	int		width;
+	int		height;
 	t_map	*map;
 
 	lines = read_lines_from_file(filename);
@@ -35,9 +61,40 @@ t_map	*make_map(char *filename)
 		write(1, "Error\n", 6);
 		exit(1);
 	}
-	map->width = get_width(lines);
-	map->height = get_height(lines);
+	values = ft_split(lines, ' ');
+	width = get_width(lines);
+	height = get_height(lines);
 	free(lines);
+	if (!values)
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+	i = 0;
+	map = ft_calloc(map->height + 1, sizeof(t_point *));
+	if (!map)
+	{
+		free(values);
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+	map->height = height;
+	map->width = width;
+	row = 0;
+	while (values[i])
+	{
+		col = 0;
+		while (values[i] != '\n')
+		{
+			map[row] = ft_calloc(map->width + 1, sizeof(t_point));
+			map[row][col] = *make_point(col, row, ft_atoi(values[i]), WHITE);
+			col++;
+			i++;
+		}
+		row++;
+		i++;
+	}
+	free(values);
 	return (map);
 }
 
