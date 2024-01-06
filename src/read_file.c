@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 15:15:35 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/06 16:12:42 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,16 @@ char	*read_lines_from_file(char *file_name)
 	if (ft_strrncmp(file_name, ".fdf", 4) != 0 || fd < 0)
 	{
 		write(2, "Error\n", 6);
+		close(fd);
 		exit(1);
 	}
 	row_num = 1;
 	lines = get_lines(fd, &row_num);
 	close(fd);
+	if (!lines)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
 	return (lines);
 }
