@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/07 16:56:06 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 18:46:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,21 @@ static void	free_values(char **values)
 {
 	int		i;
 
-	i = 0;
-	while (values[i])
-	{
+	i = -1;
+	while (values[++i])
 		free(values[i]);
-		i++;
-	}
 	free(values);
-	exit(1);
 }
 
-#include <stdio.h>
 static void	free_map(t_map *map)
 {
 	int		i;
 
 	i = -1;
-	printf("freeing map\n");
 	while (++i < map->height)
 		free(map->rows[i]);
-	printf("rows freed\n");
 	free(map->rows);
-	printf("rows array freed\n");
 	free(map);
-	printf("map freed\n");
-	exit(1);
 }
 
 static t_point	*make_point(int x, int y, int z, int color)
@@ -58,7 +48,7 @@ static t_point	*make_point(int x, int y, int z, int color)
 static t_map	*generate_map(char **values)
 {
 	t_map	*map;
-	
+
 	if (!values)
 	{
 		write(2, "Error\n", 6);
@@ -76,6 +66,7 @@ static t_map	*generate_map(char **values)
 	return (map);
 }
 
+#include <stdio.h>
 static t_map	*fill_map(t_map *map, char **values)
 {
 	int		i;
@@ -87,7 +78,7 @@ static t_map	*fill_map(t_map *map, char **values)
 	while (values[i])
 	{
 		col = 0;
-		map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
+		map->rows[row] = ft_calloc(map->width, sizeof(t_point));
 		if (!map->rows[row])
 		{
 			free_values(values);
@@ -97,11 +88,15 @@ static t_map	*fill_map(t_map *map, char **values)
 		}
 		while (values[i][0] != '\n')
 		{
+			printf("writing from index i: %d\n", i);
+			printf("value: %s\n", values[i]);
+			printf("---\n");
 			map->rows[row][col] = *make_point(row, col, ft_atoi(values[i]), WHITE);
 			col++;
 			i++;
 		}
 		row++;
+		// if (values[i] && values[i][0] == '\n')
 		i++;
 	}
 	return (map);
@@ -117,15 +112,12 @@ t_map	*make_map(char *filename)
 	values = ft_split(lines, ' ');
 	free(lines);
 	map = generate_map(values);
-	printf("map generated\n");
 	map = fill_map(map, values);
-	printf("map filled\n");
-	printf("freeing values\n");
 	free_values(values);
-	printf("values freed\n");
 	return (map);
 }
 
+#include <stdio.h>
 int main() {
     char *filename = "../test_maps/10-2.fdf";
     t_map *map = make_map(filename);
@@ -135,18 +127,16 @@ int main() {
         // printf("Map created successfully.\n");
         printf("Map height: %d\n", map->height);
         printf("Map width: %d\n", map->width);
-
         // Print the map
         for (int i = 0; i < map->height; i++) {
             for (int j = 0; j < map->width; j++) {
-                printf("x: %d \n", map->rows[i][j].x);
-				printf("y: %d \n", map->rows[i][j].y);
+                // printf("x: %d \n", map->rows[i][j].x);
+				// printf("y: %d \n", map->rows[i][j].y);
 				printf("z: %d \n", map->rows[i][j].z);
-				printf("row %d\n", i);
+				// printf("row %d\n", i);
             }
             printf("\n##############\n");
         }
-
         // Free the map when done
         for (int i = 0; i < map->height; i++) {
             free(map->rows[i]);
@@ -156,12 +146,10 @@ int main() {
     } else {
         printf("Failed to create map.\n");
     }
-
     return 0;
 }
 // cc make_map.c libft/ft_atoi.c libft/ft_split.c dimensions.c read_file.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
-#include <stdio.h>
 // t_map	*make_map_old(char *filename)
 // {
 // 	char	*lines;
