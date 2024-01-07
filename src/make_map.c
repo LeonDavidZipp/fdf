@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/07 14:35:42 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 14:54:00 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_map	*make_map(char *filename)
 	values = ft_split(lines, ' ');
 	width = get_width(lines);
 	height = get_height(lines);
-	// printf("worked 1\n");
 	free(lines);
 	if (!values)
 	{
@@ -73,18 +72,15 @@ t_map	*make_map(char *filename)
 	map->rows = ft_calloc(height + 1, sizeof(t_point *));
 	i = 0;
 	row = 0;
-	// printf("worked 2\n");
 	while (values[i])
 	{
 		col = 0;
-		// printf("worked 3\n");
+		map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
+		if (!map->rows[row])
+			free_values(values);
 		while (values[i][0] != '\n')
 		{
-			map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
-			// printf("worked 4\n");
-			if (!map->rows[row])
-				free_values(values);
-			map->rows[row][col] = *make_point(col, row, ft_atoi(values[i]), WHITE);
+			map->rows[row][col] = *make_point(row, col, ft_atoi(values[i]), WHITE);
 			col++;
 			i++;
 		}
