@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:25 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 16:12:42 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 15:05:26 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static char	*get_first_line(int fd, char **line)
 	if (!line)
 		return (NULL);
 	empty_str = ft_strdup("");
+	if (!empty_str)
+		return (NULL);
 	lines = ft_strjoin(empty_str, *line);
 	free(*line);
 	free(empty_str);

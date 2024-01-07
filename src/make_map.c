@@ -6,22 +6,26 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/07 14:54:00 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 15:14:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static t_point	*make_point(int x, int y, int z, int color)
+static char	**get_values(char *filename)
 {
-	t_point		*point;
+	char	*lines;
+	char	**values;
 
-	point = ft_calloc(1, sizeof(t_point));
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	point->color = color;
-	return (point);
+	lines = read_lines_from_file(filename);
+	values = ft_split(lines, ' ');
+	free(lines);
+	if (!values)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+	return (values);
 }
 
 static void	free_values(char **values)
@@ -36,6 +40,18 @@ static void	free_values(char **values)
 	}
 	free(values);
 	exit(1);
+}
+
+static t_point	*make_point(int x, int y, int z, int color)
+{
+	t_point		*point;
+
+	point = ft_calloc(1, sizeof(t_point));
+	point->x = x;
+	point->y = y;
+	point->z = z;
+	point->color = color;
+	return (point);
 }
 
 #include <stdio.h>
