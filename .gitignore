@@ -53,5 +53,7 @@ dkms.conf
 
 # others
 *.out
+*.yaml
 test_maps
 *.fdf
+.vscode
