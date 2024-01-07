@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 17:35:51 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 14:35:42 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	free_values(char **values)
 	exit(1);
 }
 
+#include <stdio.h>
 t_map	*make_map(char *filename)
 {
 	char	*lines;
@@ -53,6 +54,7 @@ t_map	*make_map(char *filename)
 	values = ft_split(lines, ' ');
 	width = get_width(lines);
 	height = get_height(lines);
+	// printf("worked 1\n");
 	free(lines);
 	if (!values)
 	{
@@ -68,14 +70,18 @@ t_map	*make_map(char *filename)
 	}
 	map->height = height;
 	map->width = width;
+	map->rows = ft_calloc(height + 1, sizeof(t_point *));
 	i = 0;
 	row = 0;
+	// printf("worked 2\n");
 	while (values[i])
 	{
 		col = 0;
-		while (values[i][1] != '\n')
+		// printf("worked 3\n");
+		while (values[i][0] != '\n')
 		{
 			map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
+			// printf("worked 4\n");
 			if (!map->rows[row])
 				free_values(values);
 			map->rows[row][col] = *make_point(col, row, ft_atoi(values[i]), WHITE);
@@ -89,13 +95,13 @@ t_map	*make_map(char *filename)
 	return (map);
 }
 
-#include <stdio.h>
 int main() {
     char *filename = "../test_maps/10-2.fdf";
     t_map *map = make_map(filename);
+	printf("Map created successfully.\n");
 
     if (map) {
-        printf("Map created successfully.\n");
+        // printf("Map created successfully.\n");
         printf("Map height: %d\n", map->height);
         printf("Map width: %d\n", map->width);
 
@@ -105,8 +111,9 @@ int main() {
                 printf("x: %d \n", map->rows[i][j].x);
 				printf("y: %d \n", map->rows[i][j].y);
 				printf("z: %d \n", map->rows[i][j].z);
+				printf("row %d\n", i);
             }
-            printf("\n");
+            printf("\n##############\n");
         }
 
         // Free the map when done
@@ -121,3 +128,4 @@ int main() {
 
     return 0;
 }
+// cc make_map.c libft/ft_atoi.c libft/ft_split.c dimensions.c read_file.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
