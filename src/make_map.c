@@ -6,27 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/07 15:14:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 16:56:06 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-static char	**get_values(char *filename)
-{
-	char	*lines;
-	char	**values;
-
-	lines = read_lines_from_file(filename);
-	values = ft_split(lines, ' ');
-	free(lines);
-	if (!values)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
-	return (values);
-}
 
 static void	free_values(char **values)
 {
@@ -42,6 +26,23 @@ static void	free_values(char **values)
 	exit(1);
 }
 
+#include <stdio.h>
+static void	free_map(t_map *map)
+{
+	int		i;
+
+	i = -1;
+	printf("freeing map\n");
+	while (++i < map->height)
+		free(map->rows[i]);
+	printf("rows freed\n");
+	free(map->rows);
+	printf("rows array freed\n");
+	free(map);
+	printf("map freed\n");
+	exit(1);
+}
+
 static t_point	*make_point(int x, int y, int z, int color)
 {
 	t_point		*point;
@@ -54,38 +55,33 @@ static t_point	*make_point(int x, int y, int z, int color)
 	return (point);
 }
 
-#include <stdio.h>
-t_map	*make_map(char *filename)
+static t_map	*generate_map(char **values)
 {
-	char	*lines;
-	char	**values;
-	int		i;
-	int		row;
-	int		col;
-	int		width;
-	int		height;
 	t_map	*map;
-
-	lines = read_lines_from_file(filename);
-	values = ft_split(lines, ' ');
-	width = get_width(lines);
-	height = get_height(lines);
-	free(lines);
+	
 	if (!values)
 	{
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	map = ft_calloc(height + 1, sizeof(t_point *));
+	map = ft_calloc(1, sizeof(t_map));
+	map->height = get_height(values);
+	map->width = get_width(values);
 	if (!map)
 	{
 		write(2, "Error\n", 6);
-		free(values);
 		exit(1);
 	}
-	map->height = height;
-	map->width = width;
-	map->rows = ft_calloc(height + 1, sizeof(t_point *));
+	map->rows = ft_calloc(map->height + 1, sizeof(t_point *));
+	return (map);
+}
+
+static t_map	*fill_map(t_map *map, char **values)
+{
+	int		i;
+	int		row;
+	int		col;
+
 	i = 0;
 	row = 0;
 	while (values[i])
@@ -93,7 +89,12 @@ t_map	*make_map(char *filename)
 		col = 0;
 		map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
 		if (!map->rows[row])
+		{
 			free_values(values);
+			free_map(map);
+			write(2, "Error\n", 6);
+			exit(1);
+		}
 		while (values[i][0] != '\n')
 		{
 			map->rows[row][col] = *make_point(row, col, ft_atoi(values[i]), WHITE);
@@ -103,7 +104,25 @@ t_map	*make_map(char *filename)
 		row++;
 		i++;
 	}
-	free(values);
+	return (map);
+}
+
+t_map	*make_map(char *filename)
+{
+	char	*lines;
+	char	**values;
+	t_map	*map;
+
+	lines = read_lines_from_file(filename);
+	values = ft_split(lines, ' ');
+	free(lines);
+	map = generate_map(values);
+	printf("map generated\n");
+	map = fill_map(map, values);
+	printf("map filled\n");
+	printf("freeing values\n");
+	free_values(values);
+	printf("values freed\n");
 	return (map);
 }
 
@@ -141,3 +160,49 @@ int main() {
     return 0;
 }
 // cc make_map.c libft/ft_atoi.c libft/ft_split.c dimensions.c read_file.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+
+#include <stdio.h>
+// t_map	*make_map_old(char *filename)
+// {
+// 	char	*lines;
+// 	char	**values;
+// 	int		i;
+// 	int		row;
+// 	int		col;
+// 	int		width;
+// 	int		height;
+// 	t_map	*map;
+
+// 	values = get_values(filename);
+// 	width = get_width(values);
+// 	height = get_height(values);
+// 	map = ft_calloc(get_height(values) + 1, sizeof(t_point *));
+// 	if (!map)
+// 	{
+// 		write(2, "Error\n", 6);
+// 		free(values);
+// 		exit(1);
+// 	}
+// 	map->height = height;
+// 	map->width = width;
+// 	map->rows = ft_calloc(height + 1, sizeof(t_point *));
+// 	i = 0;
+// 	row = 0;
+// 	while (values[i])
+// 	{
+// 		col = 0;
+// 		map->rows[row] = ft_calloc(map->width + 1, sizeof(t_point));
+// 		if (!map->rows[row])
+// 			free_values(values);
+// 		while (values[i][0] != '\n')
+// 		{
+// 			map->rows[row][col] = *make_point(row, col, ft_atoi(values[i]), WHITE);
+// 			col++;
+// 			i++;
+// 		}
+// 		row++;
+// 		i++;
+// 	}
+// 	free(values);
+// 	return (map);
+// }

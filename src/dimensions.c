@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:13:02 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/07 15:16:23 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/07 16:19:22 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_width(char **values)
 
 	i = 0;
 	len = 0;
-	if (!lines)
+	if (!values)
 		return (0);
 	while (values[i])
 	{
