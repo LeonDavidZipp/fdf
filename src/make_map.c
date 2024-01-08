@@ -6,19 +6,24 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/07 18:53:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/08 11:09:36 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
+#include <stdio.h>
 static void	free_values(char **values)
 {
 	int		i;
 
 	i = -1;
 	while (values[++i])
+	{
+		printf("string freed: %s\n", values[i]);
 		free(values[i]);
+	}
+	printf("freeing values\n");
 	free(values);
 }
 
@@ -45,6 +50,31 @@ static t_point	*make_point(int x, int y, int z, int color)
 	return (point);
 }
 
+static char	**remove_newlines(char **values)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (values[i])
+	{
+		if (values[i][0] == '\n')
+		{
+			temp = ft_strtrim(values[i], "\n");
+			if (!temp)
+				return (NULL);
+			free(values[i]);
+			values[i] = temp;
+			if (!values[i])
+				return (NULL);
+			free(temp);
+		}
+		i++;
+	}
+	printf("all good\n");
+	return (values);
+}
+
 static t_map	*generate_map(char **values)
 {
 	t_map	*map;
@@ -66,7 +96,6 @@ static t_map	*generate_map(char **values)
 	return (map);
 }
 
-#include <stdio.h>
 static t_map	*fill_map(t_map *map, char **values)
 {
 	int		i;
@@ -75,6 +104,7 @@ static t_map	*fill_map(t_map *map, char **values)
 
 	i = 0;
 	row = 0;
+	printf("value: %s\n", values[20]);
 	while (values[i])
 	{
 		col = 0;
@@ -89,8 +119,9 @@ static t_map	*fill_map(t_map *map, char **values)
 		while (values[i][0] != '\n')
 		{
 			printf("writing from index i: %d\n", i);
-			printf("value: %s\n", values[i]);
 			printf("---\n");
+			if (i == 20)
+				printf("at pos 20: %s\n", values[i]);
 			map->rows[row][col] = *make_point(row, col, ft_atoi(values[i]), WHITE);
 			col++;
 			i++;
@@ -105,15 +136,30 @@ static t_map	*fill_map(t_map *map, char **values)
 t_map	*make_map(char *filename)
 {
 	char	*lines;
-	char	**values;
+	char	**values_step_1;
+	char	**values_step_2;
 	t_map	*map;
 
 	lines = read_lines_from_file(filename);
-	values = ft_split(lines, ' ');
+	values_step_1 = ft_split(lines, ' ');
 	free(lines);
-	map = generate_map(values);
-	map = fill_map(map, values);
-	free_values(values);
+	printf("have gotten here 1\n");
+	if (!values_step_1)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+	values_step_2 = remove_newlines(values_step_1);
+	printf("have gotten here 2\n");
+	free_values(values_step_1);
+	if (!values_step_2)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+	map = generate_map(values_step_2);
+	map = fill_map(map, values_step_2);
+	free_values(values_step_2);
 	return (map);
 }
 
