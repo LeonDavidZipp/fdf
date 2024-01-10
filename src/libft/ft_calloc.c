@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 11:29:26 by lzipp             #+#    #+#             */
-/*   Updated: 2023/10/22 15:22:48 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/09 13:05:14 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (ptr);
 }
+
 // #include <stdio.h>
 // #include <string.h>
 // int main(void)
