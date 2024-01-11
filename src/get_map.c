@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:10:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/11 22:56:05 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/11 22:58:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ t_point	*make_row(char *line, int row_num)
 	while (++i < len)
 	{
 		value_n_color = ft_split(values[i], ',');
+		if (!value_n_color)
+		{
+			free_values(values);
+			return (NULL);
+		}
 		row[i] = *make_point(row_num, i, ft_atoi(value_n_color[i][0]), value_n_color[i][1]);
 		free_values(value_n_color);
 	}
