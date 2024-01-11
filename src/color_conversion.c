@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/11 23:27:25 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/11 23:29:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int	check_hex(char *hex_char)
 	if (hex_char[1] != 'x' && hex_char[1] != 'X')
 		return (1);
 	i = 1;
+	write(1, "hex_char: ", 10);
 	while (hex_char[++i])
 	{
-		if (!((hex_char[i] >= '0' && hex_char[i] <= '9')
-				&& !(hex_char[i] >= 'A' && hex_char[i] <= 'F')
-				&& !(hex_char[i] >= 'a' && hex_char[i] <= 'f')))
+		if (((hex_char[i] >= '0' && hex_char[i] <= '9')
+				&& (hex_char[i] >= 'A' && hex_char[i] <= 'F')
+				&& (hex_char[i] >= 'a' && hex_char[i] <= 'f')))
 			return (1);
 	}
 	return (0);
