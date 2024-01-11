@@ -6,22 +6,26 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/11 23:12:06 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/11 23:27:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../fdf.h"
 
 int	check_hex(char *hex_char)
 {
 	int		i;
 
-	if (hex_char[0] != '0' || (hex_char[1] != 'x' && hex_char[1] != 'X'))
+	if (hex_char[0] != '0')
+		return (1);
+	if (hex_char[1] != 'x' && hex_char[1] != 'X')
 		return (1);
 	i = 1;
 	while (hex_char[++i])
 	{
 		if (!((hex_char[i] >= '0' && hex_char[i] <= '9')
-				|| (hex_char[i] >= 'A' && hex_char[i] <= 'F')
-				|| (hex_char[i] >= 'a' && hex_char[i] <= 'f')))
+				&& !(hex_char[i] >= 'A' && hex_char[i] <= 'F')
+				&& !(hex_char[i] >= 'a' && hex_char[i] <= 'f')))
 			return (1);
 	}
 	return (0);
@@ -33,6 +37,8 @@ int	ft_hex_to_int(char *hex_char)
 	int		res;
 	int		power;
 
+	if (check_hex(hex_char))
+		return (-1);
 	len = 0;
 	res = 0;
 	power = 1;
@@ -42,7 +48,7 @@ int	ft_hex_to_int(char *hex_char)
 		if (hex_char[len] >= '0' && hex_char[len] <= '9')
 			res += (hex_char[len] - '0') * power;
 		else if (hex_char[len] >= 'A' && hex_char[len] <= 'F')
-			res += (hex_char[i] - 'A' + 10) * power;
+			res += (hex_char[len] - 'A' + 10) * power;
 		else if (hex_char[len] >= 'a' && hex_char[len] <= 'f')
 			res += (hex_char[len] - 'a' + 10) * power;
 		else
@@ -95,7 +101,8 @@ int	main(void)
 	char	*color;
 	int		res;
 
-	color = "0x00FF00";
+	color = "0X00FF00";
+	printf("color: |%s|\n", color);
 	res = ft_hex_to_int(color);
 	printf("res: %d\n", res);
 	return (0);
