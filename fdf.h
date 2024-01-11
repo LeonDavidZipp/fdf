@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/06 16:47:04 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/08 15:18:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,13 @@ typedef struct s_map {
 # define NUM_MINUS 27
 
 char	*read_lines_from_file(char *file_name);
-int		get_width(char *lines);
-int		get_height(char *lines);
+
+// dimensions
+int		get_width(char **values);
+int		get_height(char **values);
+
+// helpers
+void	free_values(char **values);
+void	free_map(t_map *map);
 
 #endif

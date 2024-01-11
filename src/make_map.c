@@ -6,39 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:32:58 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/08 15:02:31 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/08 15:16:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
 #include <stdio.h>
-static void	free_values(char **values)
-{
-	int		i;
-
-	i = -1;
-
-	// while (values[++i])
-	// {
-	// 	printf("string freed: |%s|\n", values[i]);
-	// 	// free(values[i]);
-	// }
-	// printf("freeing values\n");
-	free(values);
-}
-
-static void	free_map(t_map *map)
-{
-	int		i;
-
-	i = -1;
-	while (++i < map->height)
-		free(map->rows[i]);
-	free(map->rows);
-	free(map);
-}
-
 static t_point	*make_point(int x, int y, int z, int color)
 {
 	t_point		*point;
@@ -70,6 +44,7 @@ static char	**remove_newlines(char **values)
 				return (NULL);
 			}
 			values[i] = temp;
+			printf("string replaced: |%s|\n", values[i]);
 			if (!values[i])
 			{
 				free_values(values);
@@ -81,7 +56,7 @@ static char	**remove_newlines(char **values)
 	return (values);
 }
 
-static char **
+// static char **
 
 static t_map	*generate_map(char **values)
 {
