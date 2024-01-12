@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/12 17:29:42 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/12 17:30:08 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_point	*make_row(char *line, int row_num)
 {
 	t_point		*row;
 	char		**values;
-	// char		**value_n_color;
 	int			len;
 
 	values = get_values(line);
