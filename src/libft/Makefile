@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 19:14:44 by lzipp             #+#    #+#              #
-#    Updated: 2024/01/10 13:26:33 by lzipp            ###   ########.fr        #
+#    Updated: 2024/01/12 16:58:01 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ ft_putchar_fd.c\
 ft_putendl_fd.c\
 ft_putnbr_fd.c\
 ft_putstr_fd.c\
+ft_recalloc.c\
 ft_split.c\
 ft_strchr.c\
 ft_strdup.c\
