@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   ft_recalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:22:54 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/10 11:07:58 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/12 16:56:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@
 // 	free(cptr);
 // 	return (original);
 // }
-
-void	*ft_realloc(void *ptr, size_t new_size)
+#include <stdio.h>
+void	*ft_recalloc(void *ptr, size_t len, size_t data_size)
 {
 	void	*new_ptr;
 
 	if (!ptr)
-		return (malloc(new_size));
-	if (new_size == 0 && ptr)
+		return (ft_calloc(len, data_size));
+	if (len == 0 && ptr)
 	{
 		free(ptr);
 		return (malloc(0));
 	}
-	new_ptr = malloc(new_size);
+	new_ptr = ft_calloc(len + 1, data_size);
 	if (!new_ptr)
 		return (NULL);
-	ft_memmove(new_ptr, ptr, new_size);
+	ft_memmove(new_ptr, ptr, len * data_size);
 	free(ptr);
 	return (new_ptr);
 }
@@ -81,14 +81,24 @@ void	*ft_realloc(void *ptr, size_t new_size)
 // 	return (ptr);
 // }
 
-#include <stdio.h>
+// #include <stdio.h>
 #include <string.h>
 int main()
 {
     // Test case 1: Appending a non-empty string to a non-empty string
     char *original1 = strdup("Hello");
     char *to_append1 = strdup(", World!");
-    original1 = ft_realloc(original1, to_append1, strlen(original1), strlen(to_append1), sizeof(char));
+    original1 = ft_recalloc(original1, ft_strlen(original1) + ft_strlen(to_append1), sizeof(char));
+	original1[5] = ' ';
+	original1[6] = 'W';
+	original1[7] = 'o';
+	original1[8] = 'r';
+	original1[9] = 'l';
+	original1[10] = 'd';
+	original1[11] = '!';
+	original1[12] = 'a';
+	original1[13] = 'b';
+	original1[14] = 'c';
     printf("Test 1 result: |%s|\n", original1);
 	printf("strlen(result1): %zu\n", strlen(original1));
     free(original1);
@@ -96,7 +106,7 @@ int main()
     // Test case 2: Appending an empty string to a non-empty string
     char *original2 = strdup("Hello");
     char *to_append2 = strdup("");
-    original2 = ft_realloc(original2, to_append2, strlen(original2), strlen(to_append2), sizeof(char));
+    original2 = ft_recalloc(original1, ft_strlen(original2) + ft_strlen(to_append2), sizeof(char));
     printf("Test 2 result: |%s|\n", original2);
 	printf("strlen(result2): %zu\n", strlen(original2));
     free(original2);
@@ -125,13 +135,13 @@ int main()
 	// printf("strlen(result5): %zu\n", strlen(result5));
     // free(result5);
 	
-	free(original1);
-	free(original2);
-	// free(original3);
-	// free(original4);
-	// free(original5);
-	free(to_append1);
-	free(to_append2);
+	// free(original1);
+	// free(original2);
+	// // free(original3);
+	// // free(original4);
+	// // free(original5);
+	// free(to_append1);
+	// free(to_append2);
 	// free(to_append3);
 	// free(to_append4);
 	// free(to_append5);
