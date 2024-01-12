@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/12 13:13:01 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/12 14:56:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_hex(char *hex_char)
 	int		i;
 
 	if (hex_char[0] != '0' && hex_char[1] != 'x' && hex_char[1] != 'X')
+		return (1);
+	if (ft_strlen(hex_char) != 8)
 		return (1);
 	i = 1;
 	while (hex_char[++i])
@@ -32,27 +34,27 @@ int	check_hex(char *hex_char)
 int	ft_hex_to_int(char *hex_char)
 {
 	int		len;
-	int		res;
+	int		result;
 	int		power;
 
 	if (check_hex(hex_char) == 1)
 		return (-1);
-	res = 0;
+	result = 0;
 	power = 1;
 	len = ft_strlen(hex_char);
 	while (--len >= 0 && hex_char[len] != 'x' && hex_char[len] != 'X')
 	{
 		if (hex_char[len] >= '0' && hex_char[len] <= '9')
-			res += (hex_char[len] - '0') * power;
+			result += (hex_char[len] - '0') * power;
 		else if (hex_char[len] >= 'A' && hex_char[len] <= 'F')
-			res += (hex_char[len] - 'A' + 10) * power;
+			result += (hex_char[len] - 'A' + 10) * power;
 		else if (hex_char[len] >= 'a' && hex_char[len] <= 'f')
-			res += (hex_char[len] - 'a' + 10) * power;
+			result += (hex_char[len] - 'a' + 10) * power;
 		else
 			return (-1);
 		power *= 16;
 	}
-	return (res);
+	return (result);
 }
 
 int	int_to_r(int hex)
@@ -73,11 +75,14 @@ int	int_to_b(int hex)
 int	main(void)
 {
 	char	*color;
-	int		res;
+	int		result;
 
-	color = "0xFFFFFF";
+	color = "0x00A000";
 	printf("color: |%s|\n", color);
-	res = ft_hex_to_int(color);
-	printf("res: %d\n", res);
+	printf("r: %d\n", int_to_r(ft_hex_to_int(color)));
+	printf("g: %d\n", int_to_g(ft_hex_to_int(color)));
+	printf("b: %d\n", int_to_b(ft_hex_to_int(color)));
+	result = ft_hex_to_int(color);
+	printf("result: %d\n", result);
 	return (0);
 }
