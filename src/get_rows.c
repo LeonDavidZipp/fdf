@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/12 17:30:08 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/12 17:41:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,24 +123,26 @@ t_point	**get_rows(char *filename)
 }
 
 // cc make_map.c libft/ft_atoi.c libft/ft_split.c dimensions.c read_file.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
-// cc get_rows.c free_functions.c libft/ft_atoi.c color_conversion.c libft/ft_null_terminated_arr_len.c libft/ft_recalloc.c libft/ft_split.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libft/ft_memmove.c
-// #include <stdio.h>
-// int main(void)
-// {
-// 	char *filename = "../test_maps/basictest.fdf";
-// 	int fd = open(filename, O_RDONLY);
-// 	if (ft_strrncmp(filename, ".fdf", 4) != 0 || fd < 0)
-// 	{
-// 		write(2, "Error\n", 6);
-// 		close(fd);
-// 		exit(1);
-// 	}
-// 	t_point **map = get_rows(filename);
-// 	printf("Map created successfully.\n");
-// 	for (int i = 0; i < 10; i++)
-// 	{
-// 		for (int j = 0; j < 10; j++)
-// 			printf("x:%d y:%d z:%d color: %d\n", i, j, map[i][j].z, map[i][j].color);
-// 		printf("\n-------------\n\n");
-// 	}
-// }
+// cc get_rows.c free_functions.c libft/ft_atoi.c color_conversion.c libft/ft_null_terminated_arr_len.c libft/ft_recalloc.c libft/ft_split.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libft/ft_memmove.c get_map.c
+#include <stdio.h>
+int main(void)
+{
+	char *filename = "../test_maps/basictest.fdf";
+	int fd = open(filename, O_RDONLY);
+	if (ft_strrncmp(filename, ".fdf", 4) != 0 || fd < 0)
+	{
+		write(2, "Error\n", 6);
+		close(fd);
+		exit(1);
+	}
+	t_point **map = get_rows(filename);
+	printf("Map created successfully.\n");
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+			printf("x:%d y:%d z:%d color: %d\n", i, j, map[i][j].z, map[i][j].color);
+		printf("\n-------------\n\n");
+	}
+	printf("width: %d\n", get_width(map));
+	printf("height: %d\n", get_height(map));
+}
