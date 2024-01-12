@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/12 14:56:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/12 15:04:19 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(void)
 	char	*color;
 	int		result;
 
-	color = "0x00A000";
+	color = "0xFFFFFF";
 	printf("color: |%s|\n", color);
 	printf("r: %d\n", int_to_r(ft_hex_to_int(color)));
 	printf("g: %d\n", int_to_g(ft_hex_to_int(color)));
