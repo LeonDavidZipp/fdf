@@ -6,25 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/12 18:49:05 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/16 16:06:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-t_point	*make_point(int x, int y, int z, int color)
-{
-	t_point		*point;
-
-	point = malloc(sizeof(t_point));
-	if (!point)
-		return (NULL);
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	point->color = color;
-	return (point);
-}
 
 static char	**get_values(char *line)
 {
@@ -54,7 +40,7 @@ static char	**get_values(char *line)
 	return (values);
 }
 
-void	process_values(char **values, t_point *row, int row_num, int len)
+void	values_to_points(char **values, t_point **row, int row_num, int len)
 {
 	int			i;
 	int			color;
@@ -73,14 +59,28 @@ void	process_values(char **values, t_point *row, int row_num, int len)
 		color = WHITE;
 		if (ft_null_terminated_arr_len(value_n_color) == 2)
 			color = ft_hex_to_int(value_n_color[1]);
-		row[i] = *make_point(row_num, i, ft_atoi(value_n_color[0]), color);
+		row[i] = make_point(row_num, i, ft_atoi(value_n_color[0]), color);
 		free_values(value_n_color);
 	}
 }
 
-t_point	*make_row(char *line, int row_num, int *width)
+t_point	*make_point(int x, int y, int z, int color)
 {
-	t_point		*row;
+	t_point		*point;
+
+	point = malloc(sizeof(t_point));
+	if (!point)
+		return (NULL);
+	point->x = x;
+	point->y = y;
+	point->z = z;
+	point->color = color;
+	return (point);
+}
+
+t_point	**make_row(char *line, int row_num)
+{
+	t_point		**row;
 	char		**values;
 	int			len;
 
@@ -88,24 +88,23 @@ t_point	*make_row(char *line, int row_num, int *width)
 	if (!values)
 		return (NULL);
 	len = ft_null_terminated_arr_len(values);
-	row = ft_calloc(len + 1, sizeof(t_point));
+	row = ft_calloc(len + 1, sizeof(t_point *));
 	if (!row)
 	{
 		free_values(values);
 		return (NULL);
 	}
-	process_values(values, row, row_num, len);
+	values_to_points(values, row, row_num, len);
 	free_values(values);
-	*width = len;
 	return (row);
 }
 
-t_point	**get_rows(char *filename, int *width)
+t_point	***make_map(char *filename, int *width)
 {
 	int			fd;
 	int			row_num;
 	char		*line;
-	t_point		**rows;
+	t_point		***map;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -117,16 +116,16 @@ t_point	**get_rows(char *filename, int *width)
 		return (NULL);
 	}
 	row_num = 0;
-	rows = ft_calloc(1, sizeof(t_point *));
+	map = ft_calloc(1, sizeof(t_point **));
 	while (line)
 	{
 		line = get_next_line(fd);
-		rows = ft_recalloc(rows, (row_num + 1), sizeof(t_point *));
-		rows[row_num] = make_row(line, row_num, width);
+		map = ft_recalloc(map, (row_num + 1), sizeof(t_point **));
+		map[row_num] = make_row(line, row_num);
 		row_num++;
 	}
 	close(fd);
-	return (rows);
+	return (map);
 }
 
 // cc make_map.c libft/ft_atoi.c libft/ft_split.c dimensions.c read_file.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c

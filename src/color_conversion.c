@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/12 16:38:56 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/16 15:42:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_hex(char *hex_char)
 
 	if (hex_char[0] != '0' && hex_char[1] != 'x' && hex_char[1] != 'X')
 		return (1);
-	if (ft_strlen(hex_char) != 8)
+	if (ft_strlen(hex_char) <= 2)
 		return (1);
 	i = 1;
 	while (hex_char[++i])
@@ -70,19 +70,3 @@ int	int_to_b(int hex)
 {
 	return (hex & 0xFF);
 }
-
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	char	*color;
-// 	int		result;
-
-// 	color = "0xFFFFFF";
-// 	printf("color: |%s|\n", color);
-// 	printf("r: %d\n", int_to_r(ft_hex_to_int(color)));
-// 	printf("g: %d\n", int_to_g(ft_hex_to_int(color)));
-// 	printf("b: %d\n", int_to_b(ft_hex_to_int(color)));
-// 	result = ft_hex_to_int(color);
-// 	printf("result: %d\n", result);
-// 	return (0);
-// }
