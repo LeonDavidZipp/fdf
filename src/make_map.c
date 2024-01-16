@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/16 16:45:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/16 16:46:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ t_point	***make_map(int fd)
 	return (map);
 }
 
-// cc make_map.c free_functions.c libft/ft_atoi.c color_conversion.c libft/ft_null_terminated_arr_len.c libft/ft_recalloc.c libft/ft_split.c libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libft/ft_memmove.c
+// cc make_map.c free_functions.c libft/ft_atoi.c color_conversion.c 
+// libft/ft_null_terminated_arr_len.c libft/ft_recalloc.c libft/ft_split.c 
+// libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c 
+// get_next_line/get_next_line_utils.c libft/ft_memmove.c
 // #include <stdio.h>
 // int main(void)
 // {
@@ -116,7 +119,8 @@ t_point	***make_map(int fd)
 // 		j = 0;
 // 		while (map[i][j])
 // 		{
-// 			printf("x: %d, y: %d, z: %d, color: %d\n", map[i][j]->x, map[i][j]->y, map[i][j]->z, map[i][j]->color);
+// 			printf("x: %d, y: %d, z: %d, color: %d\n",
+// 				map[i][j]->x, map[i][j]->y, map[i][j]->z, map[i][j]->color);
 // 			j++;
 // 		}
 // 		i++;
