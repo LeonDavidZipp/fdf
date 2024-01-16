@@ -6,41 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/16 16:20:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/16 16:36:36 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
 static t_point	*make_point(int x, int y, int z, int color);
-
-static char	**get_values(char *line)
-{
-	char		**temp;
-	char		**values;
-	int			len;
-	int			i;
-
-	temp = ft_split(line, ' ');
-	if (!temp)
-		return (NULL);
-	len = 0;
-	while (temp[len] && temp[len][0] != '\n')
-		len++;
-	values = ft_calloc(len + 1, sizeof(char *));
-	i = -1;
-	while (++i < len)
-	{
-		values[i] = ft_strdup(temp[i]);
-		if (!values[i])
-		{
-			free_values(values);
-			free_values(temp);
-		}
-	}
-	free_values(temp);
-	return (values);
-}
 
 static void	values_to_points(char **values, t_point **row, int row_num, int len)
 {
@@ -53,11 +25,7 @@ static void	values_to_points(char **values, t_point **row, int row_num, int len)
 	{
 		value_n_color = ft_split(values[i], ',');
 		if (!value_n_color)
-		{
-			free_values(values);
-			free(row);
 			return ;
-		}
 		color = WHITE;
 		if (ft_null_terminated_arr_len(value_n_color) == 2)
 			color = ft_hex_to_int(value_n_color[1]);
@@ -101,7 +69,7 @@ static t_point	**make_row(char *line, int row_num)
 	return (row);
 }
 
-t_point	***make_map(char *filename)
+t_point	***make_map(int fd)
 {
 	int			fd;
 	int			row_num;
@@ -124,6 +92,12 @@ t_point	***make_map(char *filename)
 		line = get_next_line(fd);
 		map = ft_recalloc(map, (row_num + 1), sizeof(t_point **));
 		map[row_num] = make_row(line, row_num);
+		if (!map[row_num])
+		{
+			free_map(map);
+			close(fd);
+			return (NULL);
+		}
 		row_num++;
 	}
 	close(fd);
