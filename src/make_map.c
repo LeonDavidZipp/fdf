@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/16 16:36:36 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/16 16:45:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,13 @@ static t_point	**make_row(char *line, int row_num)
 
 t_point	***make_map(int fd)
 {
-	int			fd;
 	int			row_num;
 	char		*line;
 	t_point		***map;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
 	line = ft_strdup("");
 	if (!line)
-	{
-		close(fd);
 		return (NULL);
-	}
 	row_num = 0;
 	map = ft_calloc(1, sizeof(t_point **));
 	while (line)
@@ -95,12 +88,10 @@ t_point	***make_map(int fd)
 		if (!map[row_num])
 		{
 			free_map(map);
-			close(fd);
 			return (NULL);
 		}
 		row_num++;
 	}
-	close(fd);
 	return (map);
 }
 
