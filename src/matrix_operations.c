@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 13:06:15 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/17 13:08:35 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,15 @@ t_2d_point	*multiply_projeftion2(t_3d_point *point)
 	t_2d_point		*result;
 	double			**projection2;
 
+	result = ft_calloc(1, sizeof(t_2d_point));
+	if (!result)
+		return (NULL);
 	projection2 = make_projection2();
 	if (!projection2)
+	{
+		free(result);
 		return (NULL);
+	}
 	result->x = projection2[0][0] * point->x + projection2[0][1] * point->y
 		+ projection2[0][2] * point->z;
 	result->y = projection2[1][0] * point->x + projection2[1][1] * point->y
