@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 13:08:35 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/17 13:29:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	free_projection(double **matrix)
+static void	free_projection(double **matrix)
 {
 	int			i;
 
@@ -22,7 +22,7 @@ void	free_projection(double **matrix)
 	free(matrix);
 }
 
-double	**make_projection1(void)
+static double	**make_projection1(void)
 {
 	double	**matrix;
 
@@ -41,7 +41,7 @@ double	**make_projection1(void)
 	return (matrix);
 }
 
-double	**make_projection2(void)
+static double	**make_projection2(void)
 {
 	double	**matrix;
 
@@ -54,18 +54,18 @@ double	**make_projection2(void)
 	return (matrix);
 }
 
-t_3d_point	*multiply_projection1(t_3d_point *point)
+static t_3d_point	*multiply_projection1(t_3d_point *point)
 {
 	t_3d_point		*result;
 	double			**projection1;
 
-	result = ft_calloc(1, sizeof(t_3d_point));
-	if (!result)
-		return (NULL);
 	projection1 = make_projection1();
 	if (!projection1)
+		return (NULL);
+	result = ft_calloc(1, sizeof(t_3d_point));
+	if (!result)
 	{
-		free(result);
+		free_projection(projection1);
 		return (NULL);
 	}
 	result->x = 1 / sqrt(6) * (projection1[0][0] * point->x + projection1[0][1]
@@ -80,22 +80,25 @@ t_3d_point	*multiply_projection1(t_3d_point *point)
 
 t_2d_point	*multiply_projeftion2(t_3d_point *point)
 {
+	t_3d_point		*temp;
 	t_2d_point		*result;
 	double			**projection2;
 
-	result = ft_calloc(1, sizeof(t_2d_point));
-	if (!result)
-		return (NULL);
+	temp = multiply_projection1(point);
 	projection2 = make_projection2();
-	if (!projection2)
+	result = ft_calloc(1, sizeof(t_3d_point));
+	if (!projection2 || !result || !temp)
 	{
+		free(temp);
+		free_projection(projection2);
 		free(result);
 		return (NULL);
 	}
-	result->x = projection2[0][0] * point->x + projection2[0][1] * point->y
-		+ projection2[0][2] * point->z;
-	result->y = projection2[1][0] * point->x + projection2[1][1] * point->y
-		+ projection2[1][2] * point->z;
+	result->x = projection2[0][0] * temp->x + projection2[0][1] * temp->y
+		+ projection2[0][2] * temp->z;
+	result->y = projection2[1][0] * temp->x + projection2[1][1] * temp->y
+		+ projection2[1][2] * temp->z;
+	free(temp);
 	free_projection(projection2);
 	return (result);
 }
