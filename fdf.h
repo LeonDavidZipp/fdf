@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 12:33:53 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:08:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int			int_to_g(int hex);
 int			int_to_b(int hex);
 
 // map generation functions
-t_3d_point		***make_map(int fd);
+t_3d_point	***make_map(int fd);
+
+// isometric functions
+t_2d_point	*isometric_transform(t_3d_point *point);
 
 // free functions
 void		free_values(char **values);
