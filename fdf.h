@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 14:08:05 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:46:11 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,32 @@
 # include <math.h>
 # include <fcntl.h>
 
-typedef struct s_3d_point {
-	double		x;
-	double		y;
-	double		z;
-	int			color;
+typedef struct s_3d_point
+{
+	double			x;
+	double			y;
+	double			z;
+	int				color;
 }	t_3d_point;
 
-typedef struct s_2d_point {
-	double		x;
-	double		y;
-	int			color;
+typedef struct s_2d_point
+{
+	double			x;
+	double			y;
+	double			radius;
+	int				color;
 }	t_2d_point;
+
+typedef struct s_line
+{
+	t_2d_point		*start;
+	t_2d_point		*end;
+	double			dx;
+	double			dy;
+	double			x1_greater_x2;
+	double			y1_greater_y2;
+	double			decision_param;
+}
 
 # define WIDTH 1920
 # define HEIGHT 1080
