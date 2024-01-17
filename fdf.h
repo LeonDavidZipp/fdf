@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/16 20:30:08 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/17 12:33:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@
 # include <math.h>
 # include <fcntl.h>
 
-typedef struct s_point {
-	int		x;
-	int		y;
-	int		z;
-	int		color;
-}	t_point;
+typedef struct s_3d_point {
+	double		x;
+	double		y;
+	double		z;
+	int			color;
+}	t_3d_point;
+
+typedef struct s_2d_point {
+	double		x;
+	double		y;
+	int			color;
+}	t_2d_point;
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -49,11 +55,11 @@ int			int_to_g(int hex);
 int			int_to_b(int hex);
 
 // map generation functions
-t_point		***make_map(int fd);
+t_3d_point		***make_map(int fd);
 
 // free functions
 void		free_values(char **values);
-void		free_map(t_point ***map);
+void		free_map(t_3d_point ***map);
 
 // gui
 mlx_t 		*make_window(void);

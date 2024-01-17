@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/16 17:07:36 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/17 12:36:18 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static t_point	*make_point(int x, int y, int z, int color);
+static t_3d_point	*make_point(int x, int y, int z, int color);
 
 static char	**get_values(char *line)
 {
@@ -42,7 +42,8 @@ static char	**get_values(char *line)
 	return (values);
 }
 
-static void	values_to_points(char **values, t_point **row, int row_num, int len)
+static void	values_to_points(char **values, t_3d_point **row,
+							int row_num, int len)
 {
 	int			i;
 	int			color;
@@ -62,31 +63,31 @@ static void	values_to_points(char **values, t_point **row, int row_num, int len)
 	}
 }
 
-static t_point	*make_point(int x, int y, int z, int color)
+static t_3d_point	*make_point(int x, int y, int z, int color)
 {
-	t_point		*point;
+	t_3d_point		*point;
 
-	point = malloc(sizeof(t_point));
+	point = malloc(sizeof(t_3d_point));
 	if (!point)
 		return (NULL);
-	point->x = x;
-	point->y = y;
-	point->z = z;
+	point->x = (double)x;
+	point->y = (double)y;
+	point->z = (double)z;
 	point->color = color;
 	return (point);
 }
 
-static t_point	**make_row(char *line, int row_num)
+static t_3d_point	**make_row(char *line, int row_num)
 {
-	t_point		**row;
-	char		**values;
-	int			len;
+	t_3d_point		**row;
+	char			**values;
+	int				len;
 
 	values = get_values(line);
 	if (!values)
 		return (NULL);
 	len = ft_null_terminated_arr_len(values);
-	row = ft_calloc(len + 1, sizeof(t_point *));
+	row = ft_calloc(len + 1, sizeof(t_3d_point *));
 	if (!row)
 	{
 		free_values(values);
@@ -97,21 +98,21 @@ static t_point	**make_row(char *line, int row_num)
 	return (row);
 }
 
-t_point	***make_map(int fd)
+t_3d_point	***make_map(int fd)
 {
-	int			row_num;
-	char		*line;
-	t_point		***map;
+	int				row_num;
+	char			*line;
+	t_3d_point		***map;
 
 	line = ft_strdup("");
 	if (!line)
 		return (NULL);
 	row_num = 0;
-	map = ft_calloc(1, sizeof(t_point **));
+	map = ft_calloc(1, sizeof(t_3d_point **));
 	while (line)
 	{
 		line = get_next_line(fd);
-		map = ft_recalloc(map, (row_num + 1), sizeof(t_point **));
+		map = ft_recalloc(map, (row_num + 1), sizeof(t_3d_point **));
 		map[row_num] = make_row(line, row_num);
 		if (!map[row_num])
 		{
@@ -138,7 +139,7 @@ t_point	***make_map(int fd)
 // 		close(fd);
 // 		exit(1);
 // 	}
-// 	t_point ***map = make_map(filename);
+// 	t_3d_point ***map = make_map(filename);
 // 	printf("Map created successfully.\n");
 // 	int i = 0;
 // 	int j;
