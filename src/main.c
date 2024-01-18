@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 12:11:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 12:16:29 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static int	check_open(char *filename);
 
 int	main(int argc, char **argv)
 {
-	int			fd;
+	int				fd;
 	t_3d_point		***map;
-	mlx_t		*mlx;
+	mlx_t			*mlx;
 
 	check_input(argc, argv);
 	fd = check_open(argv[1]);
 	map = make_map(fd);
 	close(fd);
 	mlx_set_setting(MLX_MAXIMIZED, false);
-	mlx = mlx_init(WIDTH, HEIGHT, "Leon's FDF", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "Leon's FdF", true);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);
