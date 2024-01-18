@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 17:31:24 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 19:07:01 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,36 @@ static void	map_3d_to_2d(t_app_data *app_data)
 	}
 }
 
-static void	draw_line(t_2d_point *p1, t_2d_point *p2, t_app_data *app_data,
-		mlx_image_t *image)
+#include <stdio.h>
+static void	draw_line(t_2d_point *point1, t_2d_point *point2,
+	mlx_image_t *image)
 {
-	int		x;
-	int		y;
-	int		dx;
-	int		dy;
-	int		color;
+	double		x;
+	double		y;
+	double		dx;
+	double		dy;
+	int			color;
 
-	dx = abs(p2->x - p1->x);
-	dy = abs(p2->y - p1->y);
-	x = p1->x;
-	y = p1->y;
-	color = p1->color;
-	while (x != p2->x || y != p2->y)
+	dx = fabs(point2->x - point1->x);
+	dy = fabs(point2->y - point1->y);
+	x = point1->x;
+	y = point1->y;
+	color = point1->color;
+	while (x != point2->x || y != point2->y)
 	{
-		mlx_pixel_put_image(image, x, y, color);
-		if (x < p2->x)
+		printf("got here\n");
+		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, (uint32_t)color);
+		printf("got here too\n");
+		if (x < point2->x)
 			x++;
-		if (x > p2->x)
+		if (x > point2->x)
 			x--;
-		if (y < p2->y)
+		if (y < point2->y)
 			y++;
-		if (y > p2->y)
+		if (y > point2->y)
 			y--;
 	}
 }
-
 void	draw_map(t_app_data *app_data)
 {
 	int			x;
@@ -76,22 +78,26 @@ void	draw_map(t_app_data *app_data)
 	image = mlx_new_image(app_data->mlx, app_data->window_width,
 			app_data->window_height);
 	map_3d_to_2d(app_data);
+	printf("1 draw\n");
 	x = -1;
 	while (app_data->map[++x])
 	{
 		y = -1;
 		while (app_data->map[x][++y])
 		{
+			printf("2 draw\n");
 			if (app_data->map[x][y + 1])
 				draw_line(app_data->map[x][y]->projection,
 					app_data->map[x][y + 1]->projection,
-					app_data, image);
+					image);
 			if (app_data->map[x + 1])
 				draw_line(app_data->map[x][y]->projection,
 					app_data->map[x + 1][y]->projection,
-					app_data, image);
+					image);
 		}
 	}
-	mlx_put_image_to_window(app_data->mlx, app_data->window,
-		app_data->image, 0, 0);
+	mlx_image_to_window(app_data->mlx, image, 0, 0);
+	printf("3 draw\n");
+	// mlx_put_image_to_window(app_data->mlx, app_data->window,
+	// 	app_data->image, 0, 0);
 }

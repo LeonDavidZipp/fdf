@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 18:05:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 18:22:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void			free_map(t_3d_point ***map);
 // gui
 // mlx_t			*make_window(t_app_data *app_data);
 mlx_t			*make_window(void);
-void			draw_map(t_app_data *app_data)
+void			draw_map(t_app_data *app_data);
 
 #endif

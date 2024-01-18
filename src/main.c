@@ -6,12 +6,12 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 18:04:32 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 18:31:44 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
+#include <stdio.h>
 static int	check_valid_and_open(int argc, char **argv);
 t_app_data	*init_app_data(void);
 
@@ -24,8 +24,11 @@ int	main(int argc, char **argv)
 	app_data = init_app_data();
 	app_data->map = make_map(fd);
 	close(fd);
+	printf("1\n");
 	app_data->mlx = make_window();
+	printf("2\n");
 	draw_map(app_data);
+	printf("3\n");
 	mlx_loop(app_data->mlx);
 	mlx_terminate(app_data->mlx);
 	return (0);
