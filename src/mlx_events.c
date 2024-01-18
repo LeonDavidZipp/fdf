@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:15:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 13:26:23 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 18:04:32 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	event_on_resize(int x, int y, t_app_data *app_data)
 {
-	app_data->update = 1;
 	app_data->window_width = x;
 	app_data->window_height = y;
 	mlx_resize_image(app_data->image, x, y);

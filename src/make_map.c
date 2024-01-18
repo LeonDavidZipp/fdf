@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 15:16:53 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 16:07:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static t_3d_point	*make_point(int x, int y, int z, int color)
 	point->y = (double)y;
 	point->z = (double)z;
 	point->color = color;
+	point->projection = NULL;
 	return (point);
 }
 

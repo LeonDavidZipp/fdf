@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:42:09 by lzipp             #+#    #+#              #
-#    Updated: 2024/01/16 20:44:55 by lzipp            ###   ########.fr        #
+#    Updated: 2024/01/18 18:08:15 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ $(SOURCEDIR)/make_map.c \
 $(SOURCEDIR)/mlx_hooks.c \
 $(SOURCEDIR)/color_conversion.c \
 $(SOURCEDIR)/main.c \
-$(SOURCEDIR)/make_window.c
+$(SOURCEDIR)/make_window.c \
+$(SOURCEDIR)/drawing_functions.c \
 OBJECTS	:= ${SOURCES:.c=.o} $(GETNEXTLINEOBJECTS)
 
 LIBFTDIR	:= ./lib/libft

@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 12:11:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 18:03:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ void	free_map(t_3d_point ***map)
 		free(map[i++]);
 	}
 	free(map);
+}
+
+void	free_app_data(t_app_data *app_data)
+{
+	free(app_data->mlx);
+	free(app_data->window);
+	free(app_data->image);
+	free_map(app_data->map);
+	free(app_data);
 }
