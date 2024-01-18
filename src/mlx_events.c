@@ -6,19 +6,21 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:15:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 14:15:43 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 10:16:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	event_onresize(int x, int y, void *param)
-{
-	t_vars	*vars;
+#include "fdf.h"
 
-	vars = (t_vars *)param;
-	vars->update = 1;
-	vars->window_width = x;
-	vars->window_height = y;
-	mlx_resize_image(vars->image, x, y);
+void	event_onresize(int x, int y, void *app_data)
+{
+	t_app_data		*new_data;
+
+	new_data = (t_app_data *)app_data;
+	new_data->update = 1;
+	new_data->window_width = x;
+	new_data->window_height = y;
+	mlx_resize_image(new_data->image, x, y);
 }
 
 void	event_onclose(void *param)

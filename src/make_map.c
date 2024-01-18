@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 12:36:18 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 09:58:50 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,19 +107,18 @@ t_3d_point	***make_map(int fd)
 	line = ft_strdup("");
 	if (!line)
 		return (NULL);
-	row_num = 0;
+	row_num = -1;
 	map = ft_calloc(1, sizeof(t_3d_point **));
 	while (line)
 	{
 		line = get_next_line(fd);
 		map = ft_recalloc(map, (row_num + 1), sizeof(t_3d_point **));
-		map[row_num] = make_row(line, row_num);
+		map[++row_num] = make_row(line, row_num);
 		if (!map[row_num])
 		{
 			free_map(map);
 			return (NULL);
 		}
-		row_num++;
 	}
 	return (map);
 }

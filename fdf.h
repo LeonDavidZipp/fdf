@@ -6,13 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 14:46:11 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 10:16:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+// includes
 # include "./lib/libft/libft.h"
 # include "./lib/get_next_line/get_next_line.h"
 # include "./lib/MLX42/include/MLX42/MLX42.h"
@@ -20,6 +21,25 @@
 # include <math.h>
 # include <fcntl.h>
 
+// defines
+# define WIDTH 1920
+# define HEIGHT 1080
+
+# define ESC 53
+# define LEFT 123
+# define RIGHT 124
+# define UP 126
+# define DOWN 125
+# define PLUS 69
+# define MINUS 78
+# define NUM_PLUS 24
+# define NUM_MINUS 27
+
+# define WHITE 16777215
+
+# define INITIAL_RADIUS 5
+
+// structs
 typedef struct s_3d_point
 {
 	double			x;
@@ -45,23 +65,17 @@ typedef struct s_line
 	double			x1_greater_x2;
 	double			y1_greater_y2;
 	double			decision_param;
-}
+}	t_line;
 
-# define WIDTH 1920
-# define HEIGHT 1080
-
-# define ESC 53
-# define LEFT 123
-# define RIGHT 124
-# define UP 126
-# define DOWN 125
-# define PLUS 69
-# define MINUS 78
-# define NUM_PLUS 24
-# define NUM_MINUS 27
-
-// color
-# define WHITE 16777215
+typedef struct s_app_data
+{
+	void			*mlx;
+	void			*window;
+	void			*image;
+	t_3d_point		***map;
+	int				window_width;
+	int				window_height;
+}	t_app_data;
 
 int			ft_hex_to_int(char *hex_char);
 int			int_to_r(int hex);
@@ -79,6 +93,6 @@ void		free_values(char **values);
 void		free_map(t_3d_point ***map);
 
 // gui
-mlx_t 		*make_window(void);
+mlx_t		*make_window(void);
 
 #endif
