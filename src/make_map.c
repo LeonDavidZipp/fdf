@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 09:58:50 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 15:16:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,31 @@ static char	**get_values(char *line)
 	return (values);
 }
 
-static void	values_to_points(char **values, t_3d_point **row,
-							int row_num, int len)
+static t_3d_point	**values_to_points(char **values, int row_num, int len)
 {
 	int			i;
 	int			color;
 	char		**value_n_color;
+	t_3d_point	**row;
 
+	row = ft_calloc(len + 1, sizeof(t_3d_point *));
+	if (!row)
+		return (NULL);
 	i = -1;
 	while (++i < len)
 	{
 		value_n_color = ft_split(values[i], ',');
 		if (!value_n_color)
-			return ;
+			return (NULL);
 		color = WHITE;
 		if (ft_null_terminated_arr_len(value_n_color) == 2)
 			color = ft_hex_to_int(value_n_color[1]);
 		row[i] = make_point(row_num, i, ft_atoi(value_n_color[0]), color);
 		free_values(value_n_color);
+		if (!row[i])
+			return (NULL);
 	}
+	return (row);
 }
 
 static t_3d_point	*make_point(int x, int y, int z, int color)
@@ -87,13 +93,8 @@ static t_3d_point	**make_row(char *line, int row_num)
 	if (!values)
 		return (NULL);
 	len = ft_null_terminated_arr_len(values);
-	row = ft_calloc(len + 1, sizeof(t_3d_point *));
-	if (!row)
-	{
-		free_values(values);
-		return (NULL);
-	}
-	values_to_points(values, row, row_num, len);
+	row = values_to_points(values, row_num, len);
+	len = -1;
 	free_values(values);
 	return (row);
 }
@@ -107,26 +108,23 @@ t_3d_point	***make_map(int fd)
 	line = ft_strdup("");
 	if (!line)
 		return (NULL);
-	row_num = -1;
+	row_num = 0;
 	map = ft_calloc(1, sizeof(t_3d_point **));
 	while (line)
 	{
 		line = get_next_line(fd);
 		map = ft_recalloc(map, (row_num + 1), sizeof(t_3d_point **));
-		map[++row_num] = make_row(line, row_num);
-		if (!map[row_num])
-		{
-			free_map(map);
-			return (NULL);
-		}
+		map[row_num] = make_row(line, row_num);
+		row_num++;
 	}
 	return (map);
 }
 
-// cc make_map.c free_functions.c libft/ft_atoi.c color_conversion.c 
-// libft/ft_null_terminated_arr_len.c libft/ft_recalloc.c libft/ft_split.c 
-// libft/ft_strdup.c libft/ft_strrncmp.c get_next_line/get_next_line.c 
-// get_next_line/get_next_line_utils.c libft/ft_memmove.c
+// cc make_map.c color_conversion.c free_functions.c ../lib/libft/ft_atoi.c 
+// ../lib/libft/ft_null_terminated_arr_len.c ../lib/libft/ft_recalloc.c 
+// ../lib/libft/ft_split.c ../lib/libft/ft_strdup.c ../lib/libft/ft_strrncmp.c 
+// ../lib/get_next_line/get_next_line.c
+// ../lib/get_next_line/get_next_line_utils.c ../lib/libft/ft_memmove.c
 // #include <stdio.h>
 // int main(void)
 // {
@@ -138,16 +136,22 @@ t_3d_point	***make_map(int fd)
 // 		close(fd);
 // 		exit(1);
 // 	}
-// 	t_3d_point ***map = make_map(filename);
+// 	t_3d_point ***map = make_map(fd);
+// 	if (!map)
+// 	{
+// 		write(2, "Error\n", 6);
+// 		close(fd);
+// 		exit(1);
+// 	}
 // 	printf("Map created successfully.\n");
 // 	int i = 0;
 // 	int j;
-// 	while (map[i])
+// 	while (map[i] != NULL)
 // 	{
 // 		j = 0;
-// 		while (map[i][j])
+// 		while (map[i][j] != NULL)
 // 		{
-// 			printf("x: %d, y: %d, z: %d, color: %d\n",
+// 			printf("x: %f, y: %f, z: %f, color: %i\n",
 // 				map[i][j]->x, map[i][j]->y, map[i][j]->z, map[i][j]->color);
 // 			j++;
 // 		}

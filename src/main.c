@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 12:16:29 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/18 14:15:26 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int argc, char **argv)
 	map = make_map(fd);
 	close(fd);
 	mlx_set_setting(MLX_MAXIMIZED, false);
-	mlx = mlx_init(WIDTH, HEIGHT, "Leon's FdF", true);
+	// mlx = mlx_init(WIDTH, HEIGHT, "Leon's FdF", true);
+	mlx = make_window();
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);
