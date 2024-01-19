@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/17 14:09:09 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 15:26:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static double	**make_projection2(void)
 	matrix[0] = ft_calloc(3, sizeof(double));
 	matrix[1] = ft_calloc(3, sizeof(double));
 	matrix[2] = ft_calloc(3, sizeof(double));
-	matrix[1][0] = 1;
+	matrix[0][0] = 1;
 	matrix[1][1] = 1;
 	return (matrix);
 }
@@ -78,7 +78,7 @@ static t_3d_point	*multiply_projection1(t_3d_point *point)
 	return (result);
 }
 
-t_2d_point	*isometric_transform(t_3d_point *point)
+t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 {
 	t_3d_point		*temp;
 	t_2d_point		*result;
@@ -94,10 +94,10 @@ t_2d_point	*isometric_transform(t_3d_point *point)
 		free_projection(projection2);
 		return (NULL);
 	}
-	result->x = projection2[0][0] * temp->x + projection2[0][1] * temp->y
-		+ projection2[0][2] * temp->z;
-	result->y = projection2[1][0] * temp->x + projection2[1][1] * temp->y
-		+ projection2[1][2] * temp->z;
+	result->x = 0.9 * scale / scale * (projection2[0][0] * temp->x + projection2[0][1]
+			* temp->y + projection2[0][2] * temp->z);
+	result->y = 0.9 * scale / scale * (projection2[1][0] * temp->x + projection2[1][1]
+			* temp->y + projection2[1][2] * temp->z);
 	result->color = temp->color;
 	free(temp);
 	free_projection(projection2);

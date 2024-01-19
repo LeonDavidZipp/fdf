@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:26:57 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/16 20:29:51 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 14:40:50 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char			*ft_strnstr(const char *haystack,
 					const char *needle, size_t len);
 char			*ft_strtrim(char const *s1, char const *set);
 
-int				ft_null_terminated_arr_len(char **arr);
+int				ft_null_terminated_arr_len(void **arr);
 
 // bonus part 2
 

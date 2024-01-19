@@ -6,24 +6,40 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 13:29:50 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 15:44:35 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#include <stdio.h>
+// static void	apply_offset(t_2d_point *point, t_3d_point *base,
+// 				t_app_data *app_data)
+// {
+// 	printf("base->x = %f\n", base->x);
+// 	// point->x += (app_data->window_width / 2 + base->x);
+// 	// point->y += (app_data->window_height / 2 + base->y);
+// 	point->x += (app_data->window_width / 2);
+// 	point->y += (app_data->window_height / 2);
+// }
 
-static void	apply_offset(t_2d_point *point, t_3d_point *base,
-				t_app_data *app_data)
+static void	apply_offset(t_2d_point *point, t_app_data *app_data, double offset)
 {
-	point->x += (app_data->window_width / 2 + base->x) * 1.1;
-	point->y += (app_data->window_height / 2 + base->y) * 1.1;
+	point->x += (app_data->window_width / 2);
+	point->y += (app_data->window_height / 2);
 }
 
 static void	map_3d_to_2d(t_app_data *app_data)
 {
-	int		x;
-	int		y;
+	int				x;
+	int				y;
+	double			factor;
+	double			temp;
+	double			offset;
 
+	factor = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
+	temp = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
+	if (factor > temp)
+		factor = temp;
 	x = -1;
 	while (app_data->map[++x])
 	{
@@ -32,9 +48,8 @@ static void	map_3d_to_2d(t_app_data *app_data)
 		{
 			app_data->map[x][y]->projection = ft_calloc(1, sizeof(t_2d_point));
 			app_data->map[x][y]->projection = isometric_transform(
-					app_data->map[x][y]);
-			apply_offset(app_data->map[x][y]->projection,
-				app_data->map[x][y], app_data);
+					app_data->map[x][y], factor);
+			apply_offset(app_data->map[x][y]->projection, app_data);
 		}
 	}
 }
@@ -45,18 +60,14 @@ static void	draw_line(t_2d_point *point1, t_2d_point *point2,
 {
 	uint32_t		x;
 	uint32_t		y;
-	// double		dx;
-	// double		dy;
-	int			color;
+	int				color;
 
-	// dx = fabs(point2->x - point1->x);
-	// dy = fabs(point2->y - point1->y);
 	x = (uint32_t)point1->x;
 	y = (uint32_t)point1->y;
 	color = point1->color;
 	while (x != (uint32_t)point2->x || y != (uint32_t)point2->y)
 	{
-		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, (uint32_t)color);
+		mlx_put_pixel(image, x, y, (uint32_t)color);
 		if (x < point2->x)
 			x++;
 		if (x > point2->x)
@@ -81,20 +92,22 @@ void	draw_map(t_app_data *app_data)
 	}
 	map_3d_to_2d(app_data);
 	x = -1;
+	printf("len = %d\n", ft_null_terminated_arr_len((void **)app_data->map[0]));
 	while (app_data->map[++x])
 	{
 		y = -1;
 		while (app_data->map[x][++y])
 		{
 			if (app_data->map[x][y + 1])
-					draw_line(app_data->map[x][y]->projection,
+				draw_line(app_data->map[x][y]->projection,
 					app_data->map[x][y + 1]->projection,
 					app_data->image);
 			if (app_data->map[x + 1])
-					draw_line(app_data->map[x][y]->projection,
+				draw_line(app_data->map[x][y]->projection,
 					app_data->map[x + 1][y]->projection,
 					app_data->image);
 		}
 	}
+	printf("len = %d\n", ft_null_terminated_arr_len((void **)app_data->map[0]));
 	mlx_image_to_window(app_data->mlx, app_data->image, 0, 0);
 }

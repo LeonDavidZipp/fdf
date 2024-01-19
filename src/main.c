@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 13:25:33 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 14:16:18 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ int	main(int argc, char **argv)
 	app_data = init_app_data();
 	app_data->map = make_map(fd);
 	close(fd);
-	printf("1\n");
 	app_data->mlx = make_window();
-	printf("2\n");
 	draw_map(app_data);
-	printf("3\n");
 	mlx_loop(app_data->mlx);
 	mlx_terminate(app_data->mlx);
 	return (0);
