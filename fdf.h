@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 18:22:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 12:27:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ t_2d_point		*isometric_transform(t_3d_point *point);
 // free functions
 void			free_values(char **values);
 void			free_map(t_3d_point ***map);
+void			free_app_data(t_app_data *app_data)
 
 // gui
 // mlx_t			*make_window(t_app_data *app_data);

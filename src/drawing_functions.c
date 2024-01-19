@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 19:07:01 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 12:26:08 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	draw_line(t_2d_point *point1, t_2d_point *point2,
 	while (x != point2->x || y != point2->y)
 	{
 		printf("got here\n");
-		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, (uint32_t)color);
+		// mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, (uint32_t)color);
+		mlx_put_pixel(image, x, y, color);
 		printf("got here too\n");
 		if (x < point2->x)
 			x++;
@@ -73,10 +74,14 @@ void	draw_map(t_app_data *app_data)
 {
 	int			x;
 	int			y;
-	mlx_image_t	*image;
 
-	image = mlx_new_image(app_data->mlx, app_data->window_width,
+	app_data->image = mlx_new_image(app_data->mlx, app_data->window_width,
 			app_data->window_height);
+	if (!app_data->image)
+	{
+		free_app_data(app_data);
+		exit(1);
+	}
 	map_3d_to_2d(app_data);
 	printf("1 draw\n");
 	x = -1;
@@ -89,14 +94,14 @@ void	draw_map(t_app_data *app_data)
 			if (app_data->map[x][y + 1])
 				draw_line(app_data->map[x][y]->projection,
 					app_data->map[x][y + 1]->projection,
-					image);
+					app_data->image);
 			if (app_data->map[x + 1])
 				draw_line(app_data->map[x][y]->projection,
 					app_data->map[x + 1][y]->projection,
-					image);
+					app_data->image);
 		}
 	}
-	mlx_image_to_window(app_data->mlx, image, 0, 0);
+	mlx_image_to_window(app_data->mlx, app_data->image, 0, 0);
 	printf("3 draw\n");
 	// mlx_put_image_to_window(app_data->mlx, app_data->window,
 	// 	app_data->image, 0, 0);
