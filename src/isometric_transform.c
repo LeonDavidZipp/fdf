@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 15:26:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 16:46:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 		free_projection(projection2);
 		return (NULL);
 	}
-	result->x = 0.9 * scale / scale * (projection2[0][0] * temp->x + projection2[0][1]
+	result->x = 10 * scale / scale * (projection2[0][0] * temp->x + projection2[0][1]
 			* temp->y + projection2[0][2] * temp->z);
-	result->y = 0.9 * scale / scale * (projection2[1][0] * temp->x + projection2[1][1]
+	result->y = 10 * scale / scale * (projection2[1][0] * temp->x + projection2[1][1]
 			* temp->y + projection2[1][2] * temp->z);
 	result->color = temp->color;
 	free(temp);

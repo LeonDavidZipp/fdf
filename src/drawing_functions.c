@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 15:44:35 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 15:55:43 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,26 @@
 // 	point->y += (app_data->window_height / 2);
 // }
 
-static void	apply_offset(t_2d_point *point, t_app_data *app_data, double offset)
+static void	apply_offset(t_2d_point *point, t_app_data *app_data,
+							double x_offset, double y_offset)
 {
-	point->x += (app_data->window_width / 2);
-	point->y += (app_data->window_height / 2);
+	point->x += (app_data->window_width / 2 - x_offset);
+	point->y += (app_data->window_height / 2 - y_offset);
 }
 
 static void	map_3d_to_2d(t_app_data *app_data)
 {
 	int				x;
 	int				y;
+	double			x_scale;
+	double			y_scale;
 	double			factor;
-	double			temp;
-	double			offset;
 
-	factor = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
-	temp = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
-	if (factor > temp)
-		factor = temp;
+	x_scale = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
+	y_scale = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
+	factor = x_scale;
+	if (factor > y_scale)
+		factor = y_scale;
 	x = -1;
 	while (app_data->map[++x])
 	{
@@ -49,7 +51,8 @@ static void	map_3d_to_2d(t_app_data *app_data)
 			app_data->map[x][y]->projection = ft_calloc(1, sizeof(t_2d_point));
 			app_data->map[x][y]->projection = isometric_transform(
 					app_data->map[x][y], factor);
-			apply_offset(app_data->map[x][y]->projection, app_data);
+			apply_offset(app_data->map[x][y]->projection, app_data,
+				factor * x_scale / WIDTH / 2, factor * y_scale / HEIGHT / 2);
 		}
 	}
 }
