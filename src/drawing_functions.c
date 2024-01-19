@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 12:26:08 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/19 13:29:15 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	apply_offset(t_2d_point *point, t_3d_point *base,
 				t_app_data *app_data)
 {
-	point->x += (app_data->window_width / 2 + base->x) * 10;
-	point->y += (app_data->window_height / 2 + base->y) * 10;
+	point->x += (app_data->window_width / 2 + base->x) * 1.1;
+	point->y += (app_data->window_height / 2 + base->y) * 1.1;
 }
 
 static void	map_3d_to_2d(t_app_data *app_data)
@@ -43,23 +43,20 @@ static void	map_3d_to_2d(t_app_data *app_data)
 static void	draw_line(t_2d_point *point1, t_2d_point *point2,
 	mlx_image_t *image)
 {
-	double		x;
-	double		y;
-	double		dx;
-	double		dy;
+	uint32_t		x;
+	uint32_t		y;
+	// double		dx;
+	// double		dy;
 	int			color;
 
-	dx = fabs(point2->x - point1->x);
-	dy = fabs(point2->y - point1->y);
-	x = point1->x;
-	y = point1->y;
+	// dx = fabs(point2->x - point1->x);
+	// dy = fabs(point2->y - point1->y);
+	x = (uint32_t)point1->x;
+	y = (uint32_t)point1->y;
 	color = point1->color;
-	while (x != point2->x || y != point2->y)
+	while (x != (uint32_t)point2->x || y != (uint32_t)point2->y)
 	{
-		printf("got here\n");
-		// mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, (uint32_t)color);
-		mlx_put_pixel(image, x, y, color);
-		printf("got here too\n");
+		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, (uint32_t)color);
 		if (x < point2->x)
 			x++;
 		if (x > point2->x)
@@ -83,26 +80,21 @@ void	draw_map(t_app_data *app_data)
 		exit(1);
 	}
 	map_3d_to_2d(app_data);
-	printf("1 draw\n");
 	x = -1;
 	while (app_data->map[++x])
 	{
 		y = -1;
 		while (app_data->map[x][++y])
 		{
-			printf("2 draw\n");
 			if (app_data->map[x][y + 1])
-				draw_line(app_data->map[x][y]->projection,
+					draw_line(app_data->map[x][y]->projection,
 					app_data->map[x][y + 1]->projection,
 					app_data->image);
 			if (app_data->map[x + 1])
-				draw_line(app_data->map[x][y]->projection,
+					draw_line(app_data->map[x][y]->projection,
 					app_data->map[x + 1][y]->projection,
 					app_data->image);
 		}
 	}
 	mlx_image_to_window(app_data->mlx, app_data->image, 0, 0);
-	printf("3 draw\n");
-	// mlx_put_image_to_window(app_data->mlx, app_data->window,
-	// 	app_data->image, 0, 0);
 }
