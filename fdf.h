@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 14:41:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/22 12:28:01 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <math.h>
 
 // defines
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1920 * 2
+# define HEIGHT 1080 * 2
 
 # define ESC 53
 # define LEFT 123
@@ -34,7 +34,7 @@
 # define NUM_PLUS 24
 # define NUM_MINUS 27
 
-# define WHITE 16777215
+# define WHITE 0xFFFFFF
 
 # define INITIAL_RADIUS 5
 

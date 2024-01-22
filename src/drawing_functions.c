@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/22 11:22:32 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/22 13:29:33 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@
 static void	apply_offset(t_2d_point *point, t_app_data *app_data,
 		double x_offset, double y_offset)
 {
-	point->x += (app_data->window_width / 2 - x_offset);
-	point->y += (app_data->window_height / 2 - y_offset);
+	printf("x_offset = %f\n", x_offset);
+	printf("y_offset = %f\n", y_offset);
+	// point->x += (app_data->window_width / 2 - x_offset);
+	// point->y += (app_data->window_height / 2 - y_offset);
+	point->x += (app_data->window_width * 3 / 2 + x_offset * 10);
+	point->y += (app_data->window_height *3 / 2 + y_offset * 10);
 }
 
 static void	map_3d_to_2d(t_app_data *app_data)
@@ -37,8 +41,8 @@ static void	map_3d_to_2d(t_app_data *app_data)
 	double	y_scale;
 	double	factor;
 
-	x_scale = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
-	y_scale = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
+	x_scale = app_data->image->width / ft_null_terminated_arr_len((void **)app_data->map[0]);
+	y_scale = app_data->image->height / ft_null_terminated_arr_len((void **)app_data->map);
 	factor = x_scale;
 	if (factor > y_scale)
 		factor = y_scale;
@@ -103,9 +107,8 @@ void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *image)
 	y = start->y;
 	while (x <= (uint32_t)end->x && y <= (uint32_t)end->y)
 	{
-		printf("hello\n");
 		if (x < image->width && y < image->height)
-			mlx_put_pixel(image, x, y, start->color);
+			mlx_put_pixel(image, y, x, start->color);
 		e2 = err;
 		if (e2 > -dx)
 		{
@@ -147,6 +150,5 @@ void	draw_map(t_app_data *app_data)
 					+ 1][y]->projection, app_data->image);
 		}
 	}
-	printf("len = %d\n", ft_null_terminated_arr_len((void **)app_data->map[0]));
 	mlx_image_to_window(app_data->mlx, app_data->image, 0, 0);
 }
