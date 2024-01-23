@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/23 12:03:29 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/23 12:20:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@
 static void	apply_offset(t_2d_point *point, t_app_data *app_data,
 		double x_offset, double y_offset)
 {
-	point->x += (app_data->window_width / 2 - x_offset);
-	point->y += (app_data->window_height / 2 - y_offset);
+	x_offset *= y_offset;
+	point->x += (1.25 * app_data->window_width - app_data->image->width) / 2;
+	point->y += (2 * app_data->window_height - app_data->image->height) / 2;
 }
 
 static void	map_3d_to_2d(t_app_data *app_data)
 {
-	int		x;
-	int		y;
-	double	x_scale;
-	double	y_scale;
-	double	factor;
+	int			x;
+	int			y;
+	double		x_scale;
+	double		y_scale;
+	double		scale;
 
 	x_scale = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
 	y_scale = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
-	factor = x_scale;
-	if (factor > y_scale)
-		factor = y_scale;
+	scale = x_scale;
+	if (scale > y_scale)
+		scale = y_scale;
 	x = -1;
 	while (app_data->map[++x])
 	{
@@ -40,18 +41,18 @@ static void	map_3d_to_2d(t_app_data *app_data)
 		while (app_data->map[x][++y])
 		{
 			app_data->map[x][y]->projection = ft_calloc(1, sizeof(t_2d_point));
-			app_data->map[x][y]->projection = isometric_transform(app_data->map[x][y],
-					factor);
-			apply_offset(app_data->map[x][y]->projection, app_data, factor
-				* x_scale / WIDTH / 2, factor * y_scale / HEIGHT / 2);
+			app_data->map[x][y]->projection = isometric_transform(
+					app_data->map[x][y], scale);
+			apply_offset(app_data->map[x][y]->projection, app_data, scale
+				* x_scale / WIDTH / 2, scale * y_scale / HEIGHT / 2);
 		}
-		// y = 0;
-		// while (app_data->map[x][y] && app_data->map[x][y]->projection != NULL)
-		// {
-		// 	printf("x %d y %d projection_x %f projection_y %f\n", x, y, app_data->map[x][y]->projection->x, app_data->map[x][y]->projection->y);
-		// 	printf("\n");
-		// 	y++;
-		// }
+		y = 0;
+		while (app_data->map[x][y] && app_data->map[x][y]->projection != NULL)
+		{
+			printf("x %d y %d projection_x %f projection_y %f\n", x, y, app_data->map[x][y]->projection->x, app_data->map[x][y]->projection->y);
+			printf("\n");
+			y++;
+		}
 	}
 }
 
