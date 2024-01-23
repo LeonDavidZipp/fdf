@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/22 12:04:39 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/22 15:47:50 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,15 @@ int	ft_hex_to_int(char *hex_char)
 
 int	int_to_r(int hex)
 {
-	// return ((hex >> 16) & 0xFF);
-	return ((hex >> 24) & 0xFF);
+	return ((hex >> 16) & 0xFF);
 }
 
 int	int_to_g(int hex)
 {
-	// return ((hex >> 8) & 0xFF);
-	return ((hex >> 16) & 0xFF);
+	return ((hex >> 8) & 0xFF);
 }
 
 int	int_to_b(int hex)
 {
-	// return (hex & 0xFF);
-	return ((hex >> 8) & 0xFF);
+	return (hex & 0xFF);
 }
