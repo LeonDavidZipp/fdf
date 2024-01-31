@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:05:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 16:01:09 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static void	free_projection(double **matrix)
+static void	free_matrix(double **matrix)
 {
 	int			i;
 
@@ -68,7 +68,7 @@ static t_3d_point	*multiply_projection1(t_3d_point *point)
 	if (!projection1 || !result)
 	{
 		free(result);
-		free_projection(projection1);
+		free_matrix(projection1);
 		return (NULL);
 	}
 	result->x = 1 / sqrt(6) * (projection1[0][0] * point->x + projection1[0][1]
@@ -78,7 +78,7 @@ static t_3d_point	*multiply_projection1(t_3d_point *point)
 	result->z = 1 / sqrt(6) * (projection1[2][0] * point->x + projection1[2][1]
 			* point->y + projection1[2][2] * point->z);
 	result->color = point->color;
-	free_projection(projection1);
+	free_matrix(projection1);
 	return (result);
 }
 
@@ -95,7 +95,7 @@ t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 	{
 		free(temp);
 		free(result);
-		free_projection(projection2);
+		free_matrix(projection2);
 		return (NULL);
 	}
 	result->x = scale * (projection2[0][0] * temp->x + projection2[0][1]
@@ -104,6 +104,6 @@ t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 			* temp->y + projection2[1][2] * temp->z);
 	result->color = temp->color;
 	free(temp);
-	free_projection(projection2);
+	free_matrix(projection2);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:58:40 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 16:03:09 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,42 +120,3 @@ t_3d_point	***make_map(int fd)
 	}
 	return (map);
 }
-
-// cc make_map.c color_conversion.c free_functions.c ../lib/libft/ft_atoi.c 
-// ../lib/libft/ft_null_terminated_arr_len.c ../lib/libft/ft_recalloc.c 
-// ../lib/libft/ft_split.c ../lib/libft/ft_strdup.c ../lib/libft/ft_strrncmp.c 
-// ../lib/get_next_line/get_next_line.c
-// ../lib/get_next_line/get_next_line_utils.c ../lib/libft/ft_memmove.c
-// #include <stdio.h>
-// int main(void)
-// {
-// 	char *filename = "../test_maps/elem-col.fdf";
-// 	int fd = open(filename, O_RDONLY);
-// 	if (ft_strrncmp(filename, ".fdf", 4) != 0 || fd < 0)
-// 	{
-// 		write(2, "Error\n", 6);
-// 		close(fd);
-// 		exit(1);
-// 	}
-// 	t_3d_point ***map = make_map(fd);
-// 	if (!map)
-// 	{
-// 		write(2, "Error\n", 6);
-// 		close(fd);
-// 		exit(1);
-// 	}
-// 	printf("Map created successfully.\n");
-// 	int i = 0;
-// 	int j;
-// 	while (map[i] != NULL)
-// 	{
-// 		j = 0;
-// 		while (map[i][j] != NULL)
-// 		{
-// 			printf("x: %f, y: %f, z: %f, color: %i\n",
-// 				map[i][j]->x, map[i][j]->y, map[i][j]->z, map[i][j]->color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
