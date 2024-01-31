@@ -6,13 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/19 14:16:18 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 14:57:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#include <stdio.h>
+
 static int	check_valid_and_open(int argc, char **argv);
+
 t_app_data	*init_app_data(void);
 
 int	main(int argc, char **argv)
@@ -26,7 +27,10 @@ int	main(int argc, char **argv)
 	close(fd);
 	app_data->mlx = make_window();
 	draw_map(app_data);
+	mlx_hook(app_data->mlx, 17, 0, &event_onclose, app_data);
+	mlx_hook(app_data->mlx, 25, 0, &event_on_resize, app_data);
 	mlx_loop(app_data->mlx);
+	mlx_loop_hook(app_data->mlx, esc_hook, app_data);
 	mlx_terminate(app_data->mlx);
 	return (0);
 }

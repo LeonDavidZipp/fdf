@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 13:09:53 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 14:53:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,11 @@ void			free_app_data(t_app_data *app_data);
 // mlx_t			*make_window(t_app_data *app_data);
 mlx_t			*make_window(void);
 void			draw_map(t_app_data *app_data);
+
+// loops & hooks
+void			esc_hook(void	*data);
+void			event_on_resize(int x, int y, t_app_data *app_data);
+void			event_onclose(t_app_data *app_data);
+void			event_onfail(t_app_data *app_data, int rows);
 
 #endif
