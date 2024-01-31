@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/18 18:03:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:47:36 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	free_map(t_3d_point ***map)
 	{
 		j = 0;
 		while (map[i][j])
+		{
+			free(map[i][j]->projection);
 			free(map[i][j++]);
+		}
 		free(map[i++]);
 	}
 	free(map);
