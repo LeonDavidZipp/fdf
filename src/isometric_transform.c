@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 13:11:54 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:05:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static double	**make_projection1(void)
 	double	**matrix;
 
 	matrix = ft_calloc(3, sizeof(double *));
+	if (!matrix)
+		return (NULL);
 	matrix[0] = ft_calloc(3, sizeof(double));
 	matrix[1] = ft_calloc(3, sizeof(double));
 	matrix[2] = ft_calloc(3, sizeof(double));
@@ -46,6 +48,8 @@ static double	**make_projection2(void)
 	double	**matrix;
 
 	matrix = ft_calloc(3, sizeof(double *));
+	if (!matrix)
+		return (NULL);
 	matrix[0] = ft_calloc(3, sizeof(double));
 	matrix[1] = ft_calloc(3, sizeof(double));
 	matrix[2] = ft_calloc(3, sizeof(double));

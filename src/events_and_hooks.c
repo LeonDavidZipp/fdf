@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:15:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:00:59 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:04:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	esc_hook(void	*data)
 	t_app_data		*app_data;
 
 	app_data = (t_app_data *)data;
-	if (mlx_is_key_down(app_data->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(app_data->mlx, ESC))
 	{
 		mlx_terminate(app_data->mlx);
 		free_app_data(app_data);

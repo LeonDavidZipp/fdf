@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 14:53:25 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:02:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <math.h>
 
 // defines
-# define WIDTH 1920 * 2
-# define HEIGHT 1080 * 2
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define ESC 53
 # define LEFT 123
