@@ -6,15 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 13:38:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:37:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 #include <stdio.h>
 
-static void	apply_offset(t_2d_point *point, // t_app_data *app_data,
-		double x_offset, double y_offset)
+static void	apply_offset(t_2d_point *point, double x_offset, double y_offset)
 {
 	point->x += x_offset;
 	point->y += y_offset;
@@ -27,16 +26,12 @@ static void	map_3d_to_2d(t_app_data *app_data)
 	double	x_scale;
 	double	y_scale;
 	double	scale;
-	double	x_offset;
-	double	y_offset;
 
 	x_scale = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
 	y_scale = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
 	scale = x_scale;
 	if (scale > y_scale)
 		scale = y_scale;
-	x_offset = (app_data->image->width - scale * ft_null_terminated_arr_len((void **)app_data->map[0])) / 2;
-	y_offset = (app_data->image->height - scale * ft_null_terminated_arr_len((void **)app_data->map)) / 2;
 	x = -1;
 	while (app_data->map[++x])
 	{
@@ -46,7 +41,7 @@ static void	map_3d_to_2d(t_app_data *app_data)
 			app_data->map[x][y]->projection = ft_calloc(1, sizeof(t_2d_point));
 			app_data->map[x][y]->projection = isometric_transform(app_data->map[x][y],
 					scale);
-			apply_offset(app_data->map[x][y]->projection, x_offset, y_offset);
+			apply_offset(app_data->map[x][y]->projection, app_data->image->width / 2, app_data->image->height / 2);
 		}
 		y = 0;
 		while (app_data->map[x][y] && app_data->map[x][y]->projection != NULL)

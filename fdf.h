@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:02:45 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:45:07 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@
 
 # define WHITE 0xFFFFFF
 
-# define INITIAL_RADIUS 5
-
 // structs
 typedef struct s_2d_point
 {
 	double		x;
 	double		y;
-	double		radius;
 	int			color;
 }				t_2d_point;
 
@@ -106,6 +103,6 @@ void			draw_map(t_app_data *app_data);
 void			esc_hook(void	*data);
 void			event_on_resize(int x, int y, t_app_data *app_data);
 void			event_onclose(t_app_data *app_data);
-void			event_onfail(t_app_data *app_data, int rows);
+void			event_onfail(t_app_data *app_data);
 
 #endif

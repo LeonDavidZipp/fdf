@@ -6,11 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:15:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:04:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:40:01 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 void	event_on_resize(int x, int y, t_app_data *app_data)
 {
@@ -28,7 +28,7 @@ void	event_onclose(t_app_data *app_data)
 	exit(0);
 }
 
-void	event_onfail(t_app_data *app_data, int rows)
+void	event_onfail(t_app_data *app_data)
 {
 	free_map(app_data->map);
 	mlx_terminate(app_data->mlx);
