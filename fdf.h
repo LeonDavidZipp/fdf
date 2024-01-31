@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/22 12:28:01 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 13:09:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ typedef struct s_app_data
 	void		*window;
 	mlx_image_t	*image;
 	t_3d_point	***map;
+	double		max_x_projection;
+	double		min_x_projection;
+	double		max_y_projection;
+	double		min_y_projection;
 	int			window_width;
 	int			window_height;
 }				t_app_data;

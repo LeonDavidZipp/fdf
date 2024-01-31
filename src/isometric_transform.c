@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/23 11:46:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 13:11:54 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static t_3d_point	*multiply_projection1(t_3d_point *point)
 	free_projection(projection1);
 	return (result);
 }
-#include <stdio.h>
+
 t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 {
 	t_3d_point		*temp;
@@ -94,10 +94,9 @@ t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 		free_projection(projection2);
 		return (NULL);
 	}
-	// printf("scale %f\n", scale);
-	result->x = 15 * scale / scale * (projection2[0][0] * temp->x + projection2[0][1]
+	result->x = scale * (projection2[0][0] * temp->x + projection2[0][1]
 			* temp->y + projection2[0][2] * temp->z);
-	result->y = 15 * scale / scale * (projection2[1][0] * temp->x + projection2[1][1]
+	result->y = scale * (projection2[1][0] * temp->x + projection2[1][1]
 			* temp->y + projection2[1][2] * temp->z);
 	result->color = temp->color;
 	free(temp);
