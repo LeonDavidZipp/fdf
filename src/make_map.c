@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/23 11:59:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:58:40 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_3d_point	**values_to_points(char **values, int row_num, int len)
 		if (!value_n_color)
 			return (NULL);
 		color = WHITE;
-		if (ft_null_terminated_arr_len((void**)(value_n_color)) == 2)
+		if (ft_null_terminated_arr_len((void **)(value_n_color)) == 2)
 			color = ft_hex_to_int(value_n_color[1]);
 		row[i] = make_point(row_num, i, ft_atoi(value_n_color[0]), color);
 		free_values(value_n_color);
@@ -83,7 +83,7 @@ static t_3d_point	*make_point(int x, int y, int z, int color)
 	point->projection = NULL;
 	return (point);
 }
-#include <stdio.h>
+
 static t_3d_point	**make_row(char *line, int row_num)
 {
 	t_3d_point		**row;

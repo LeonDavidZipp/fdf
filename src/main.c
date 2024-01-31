@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:43:14 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:56:11 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	close(fd);
 	app_data->mlx = make_window();
 	draw_map(app_data);
-	mlx_hook(app_data->mlx, 17, 0, &event_onclose, app_data);
-	mlx_hook(app_data->mlx, 25, 0, &event_on_resize, app_data);
+	// mlx_hook(app_data->mlx, 17, 0, &event_onclose, app_data);
+	// mlx_hook(app_data->mlx, 25, 0, &event_on_resize, app_data);
 	mlx_loop(app_data->mlx);
 	mlx_loop_hook(app_data->mlx, esc_hook, app_data);
 	mlx_terminate(app_data->mlx);

@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 15:45:07 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:57:32 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ typedef struct s_3d_point
 	int			color;
 	t_2d_point	*projection;
 }				t_3d_point;
-
-typedef struct s_line
-{
-	t_2d_point	*start;
-	t_2d_point	*end;
-	double		dx;
-	double		dy;
-	double		x1_greater_x2;
-	double		y1_greater_y2;
-	double		decision_param;
-}				t_line;
 
 typedef struct s_app_data
 {
