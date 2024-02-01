@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:42:09 by lzipp             #+#    #+#              #
-#    Updated: 2024/01/31 15:38:59 by lzipp            ###   ########.fr        #
+#    Updated: 2024/02/01 16:45:44 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ GETNEXTLINEOBJECTS = ${GETNEXTLINESOURCES:.c=.o}
 SOURCEDIR	:= ./src
 SOURCES = $(SOURCEDIR)/free_functions.c \
 $(SOURCEDIR)/make_map.c \
-$(SOURCEDIR)/events_and_hooks.c \
 $(SOURCEDIR)/color_conversion.c \
 $(SOURCEDIR)/make_window.c \
 $(SOURCEDIR)/drawing_functions.c \

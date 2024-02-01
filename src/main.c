@@ -6,15 +6,15 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 16:19:36 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:44:35 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
 static int	check_valid_and_open(int argc, char **argv);
-
 t_app_data	*init_app_data(void);
+void		esc_hook(void	*data);
 
 int	main(int argc, char **argv)
 {
@@ -72,4 +72,17 @@ t_app_data	*init_app_data(void)
 	app_data->image = NULL;
 	app_data->map = NULL;
 	return (app_data);
+}
+
+void	esc_hook(void	*data)
+{
+	t_app_data		*app_data;
+
+	app_data = (t_app_data *)data;
+	if (mlx_is_key_down(app_data->mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_terminate(app_data->mlx);
+		free_app_data(app_data);
+		exit(0);
+	}
 }

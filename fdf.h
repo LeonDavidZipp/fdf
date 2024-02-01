@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 16:21:58 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/01 17:00:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,8 @@
 # include <math.h>
 
 // defines
-# define WIDTH 1920
+# define WIDTH 1080
 # define HEIGHT 1080
-
-// # define ESC 53
-// # define LEFT 123
-// # define RIGHT 124
-// # define UP 126
-// # define DOWN 125
-// # define PLUS 69
-// # define MINUS 78
-// # define NUM_PLUS 24
-// # define NUM_MINUS 27
-
 # define WHITE 0xFFFFFF
 
 // structs

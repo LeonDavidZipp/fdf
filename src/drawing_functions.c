@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 17:20:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:45:55 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,41 @@
 
 static void	apply_offset(t_2d_point *point, double x_offset, double y_offset)
 {
-	point->x += x_offset;
-	point->y += y_offset;
+	point->x += x_offset + 300;
+	point->y += y_offset + 100;
 }
 
-static double	calculate_scale(t_3d_point ***map)
-{
-	int				i;
-	int				j;
-	int				x_max;
-	int				y_max;
-	int				y_min;
-	t_2d_point		*point;
+// static double	calculate_scale(t_3d_point ***map)
+// {
+// 	int				i;
+// 	int				j;
+// 	int				x_max;
+// 	int				y_max;
+// 	int				y_min;
+// 	t_2d_point		*point;
 
-	i = -1;
-	point = isometric_transform(map[0][0], 1);
-	x_max = point->x;
-	y_max = point->y;
-	y_min = point->y;
-	free(point);
-	while (map[++i])
-	{
-		j = -1;
-		while (map[i][++j])
-		{
-			point = isometric_transform(map[i][j], 1);
-			if (point->x > x_max)
-				x_max = point->x;
-			if (point->y > y_max)
-				y_max = point->y;
-			if (point->y < y_min)
-				y_min = point->y;
-			free(point);
-		}
-	}
-}
+// 	i = -1;
+// 	point = isometric_transform(map[0][0], 1);
+// 	x_max = point->x;
+// 	y_max = point->y;
+// 	y_min = point->y;
+// 	free(point);
+// 	while (map[++i])
+// 	{
+// 		j = -1;
+// 		while (map[i][++j])
+// 		{
+// 			point = isometric_transform(map[i][j], 1);
+// 			if (point->x > x_max)
+// 				x_max = point->x;
+// 			if (point->y > y_max)
+// 				y_max = point->y;
+// 			if (point->y < y_min)
+// 				y_min = point->y;
+// 			free(point);
+// 		}
+// 	}
+// }
 
 static void	map_3d_to_2d(t_app_data *app_data)
 {
