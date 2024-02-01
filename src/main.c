@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/01 16:44:35 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:23:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	esc_hook(void	*data)
 	if (mlx_is_key_down(app_data->mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_terminate(app_data->mlx);
-		free_app_data(app_data);
+		// free_app_data(app_data);
 		exit(0);
 	}
 }

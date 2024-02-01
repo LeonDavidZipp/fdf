@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/01/31 16:01:09 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:26:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 	double			**projection2;
 
 	temp = multiply_projection1(point);
-	result = ft_calloc(1, sizeof(t_3d_point));
+	result = ft_calloc(1, sizeof(t_2d_point));
 	projection2 = make_projection2();
 	if (!projection2 || !result || !temp)
 	{
