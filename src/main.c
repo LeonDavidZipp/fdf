@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 15:04:19 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 17:07:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_valid_and_open(int argc, char **argv)
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	if (ft_strrncmp(argv[1], ".fdf", 4) != 0)
+	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".fdf", 4) != 0)
 	{
 		write(2, "Error\n", 6);
 		exit(1);

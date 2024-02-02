@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 15:39:48 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 16:56:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // defines
 # define WIDTH 1080
 # define HEIGHT 1080
-# define WHITE 0xFFFFFF
+# define WHITE 0xAAFF00
 
 // structs
 typedef struct s_2d_point

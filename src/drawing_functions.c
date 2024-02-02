@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 15:54:19 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 16:38:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static t_line	*init_line(t_2d_point *start, t_2d_point *end)
 		line->err = -(line->dy / 2);
 	line->x = start->x;
 	line->y = start->y;
-	line->e2 = line->err;
 	return (line);
 }
 
@@ -88,11 +87,9 @@ static void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *img)
 			|| (line->sy > 0 && line->y > (uint32_t)end->y)
 			|| (line->sy <= 0 && line->y < (uint32_t)end->y)))
 	{
-		if (line->x <= img->width && line->y <= img->height
-			&& line->x < end->x + start->x / 2)
+		if (line->x <= img->height && line->y <= img->width)
 			mlx_put_pixel(img, line->y, line->x, start->color);
-		else if (line->x <= img->width && line->y <= img->height)
-			mlx_put_pixel(img, line->y, line->x, end->color);
+		line->e2 = line->err;
 		if (line->e2 > -line->dx)
 		{
 			line->err -= line->dy;
