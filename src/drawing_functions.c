@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 20:59:40 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 21:00:56 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	apply_offset(t_2d_point *point, double scale,
 	point->x += x_offset;
 	point->y += y_offset;
 }
-#include <stdio.h>
+
 static void	map_3d_to_2d(t_app_data *app_data)
 {
 	int		x;
@@ -34,7 +34,6 @@ static void	map_3d_to_2d(t_app_data *app_data)
 
 	x_scale = WIDTH / ft_null_terminated_arr_len((void **)app_data->map[0]);
 	y_scale = HEIGHT / ft_null_terminated_arr_len((void **)app_data->map);
-	printf("number of points in x: %d\n", ft_null_terminated_arr_len((void **)app_data->map[0]) * ft_null_terminated_arr_len((void **)app_data->map));
 	scale = x_scale / 2;
 	if (scale > y_scale / 2)
 		scale = y_scale / 2;
@@ -89,7 +88,7 @@ static void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *img)
 			|| (line->sy <= 0 && line->y < (uint32_t)end->y)))
 	{
 		if (line->x <= img->height && line->y <= img->width)
-			mlx_put_pixel(img, line->y, line->x, start->color)
+			mlx_put_pixel(img, line->y, line->x, start->color);
 		line->e2 = line->err;
 		if (line->e2 > -line->dx)
 		{
