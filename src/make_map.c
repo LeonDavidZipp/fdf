@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:11 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 15:03:14 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 15:43:22 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	**get_values(char *line)
 	free_values(temp);
 	return (values);
 }
-
+#include <stdio.h>
 static t_3d_point	**values_to_points(char **values, int row_num, int len)
 {
 	int			i;
@@ -59,8 +59,9 @@ static t_3d_point	**values_to_points(char **values, int row_num, int len)
 		if (!value_n_color)
 			return (NULL);
 		color = WHITE;
+		printf("len: %d\n", ft_null_terminated_arr_len((void **)(value_n_color)));
 		if (ft_null_terminated_arr_len((void **)(value_n_color)) == 2)
-			color = ft_hex_to_int(value_n_color[1]);
+			{color = ft_hex_to_int(value_n_color[1]); printf("color: %d\n", color);}
 		row[i] = make_point(row_num, i, ft_atoi(value_n_color[0]), color);
 		free_values(value_n_color);
 		if (!row[i])
@@ -78,7 +79,7 @@ static t_3d_point	*make_point(int x, int y, int z, int color)
 		return (NULL);
 	point->x = (double)x;
 	point->y = (double)y;
-	point->z = (double)z;
+	point->z = (double)z / 3;
 	point->color = color;
 	point->projection = NULL;
 	return (point);
