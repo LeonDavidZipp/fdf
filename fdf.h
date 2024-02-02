@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 12:43:05 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 12:59:43 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,6 @@ void			free_map(t_3d_point ***map);
 void			free_app_data(t_app_data *app_data);
 
 // gui
-mlx_t			*make_window(void);
 void			draw_map(t_app_data *app_data);
-
-// loops & hooks
-void			esc_hook(void	*data);
-void			event_on_resize(int x, int y, t_app_data *app_data);
-void			event_onclose(t_app_data *app_data);
-void			event_onfail(t_app_data *app_data);
 
 #endif

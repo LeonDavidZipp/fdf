@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 12:46:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 13:00:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	map_3d_to_2d(t_app_data *app_data)
 	}
 }
 
-t_line	*init_line(t_2d_point *start, t_2d_point *end)
+static t_line	*init_line(t_2d_point *start, t_2d_point *end)
 {
 	t_line	*line;
 
@@ -77,7 +77,7 @@ t_line	*init_line(t_2d_point *start, t_2d_point *end)
 	return (line);
 }
 
-void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *image)
+static void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *image)
 {
 	t_line		*line;
 

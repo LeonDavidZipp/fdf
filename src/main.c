@@ -6,15 +6,16 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 12:53:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 13:02:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static int	check_valid_and_open(int argc, char **argv);
-t_app_data	*init_app_data(int fd);
-void		esc_hook(void	*data);
+static int			check_valid_and_open(int argc, char **argv);
+static t_app_data	*init_app_data(int fd);
+static void			esc_hook(void *data);
+static mlx_t		*make_window(int window_width, int window_height);
 
 int	main(int argc, char **argv)
 {
@@ -54,7 +55,7 @@ static int	check_valid_and_open(int argc, char **argv)
 	return (fd);
 }
 
-t_app_data	*init_app_data(int fd)
+static t_app_data	*init_app_data(int fd)
 {
 	t_app_data	*app_data;
 
@@ -64,15 +65,16 @@ t_app_data	*init_app_data(int fd)
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	app_data->mlx = make_window();
-	app_data->map = make_map(fd);
-	app_data->image = NULL;
 	app_data->window_width = WIDTH;
 	app_data->window_height = HEIGHT;
+	app_data->mlx = make_window(app_data->window_width,
+			app_data->window_height);
+	app_data->map = make_map(fd);
+	app_data->image = NULL;
 	return (app_data);
 }
 
-void	esc_hook(void	*data)
+static void	esc_hook(void *data)
 {
 	t_app_data		*app_data;
 
@@ -83,4 +85,14 @@ void	esc_hook(void	*data)
 		free_app_data(app_data);
 		exit(0);
 	}
+}
+
+static mlx_t	*make_window(int window_width, int window_height)
+{
+	mlx_t		*mlx;
+
+	mlx_set_setting(MLX_MAXIMIZED, false);
+	mlx = mlx_init(window_width, window_height, "Leon's FDF", false);
+	mlx_put_string(mlx, "ESC to exit", 10, 10);
+	return (mlx);
 }
