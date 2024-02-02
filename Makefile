@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:42:09 by lzipp             #+#    #+#              #
-#    Updated: 2024/02/02 12:59:23 by lzipp            ###   ########.fr        #
+#    Updated: 2024/02/02 15:10:54 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OBJECTS	:= ${SOURCES:.c=.o} $(GETNEXTLINEOBJECTS)
 
 LIBFTDIR	:= ./lib/libft
 LIBFT		:= $(LIBFTDIR)/libft.a
-LIBFTSOURCES = SOURCES = $(LIBFTDIR)/ft_lstclear_bonus.c \
+LIBFTSOURCES = $(LIBFTDIR)/ft_lstclear_bonus.c \
 $(LIBFTDIR)/ft_null_terminated_arr_len.c \
 $(LIBFTDIR)/ft_strlcpy.c \
 $(LIBFTDIR)/ft_atoi.c \
