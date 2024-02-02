@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 11:58:19 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 12:06:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ static void	map_3d_to_2d(t_app_data *app_data)
 		y = -1;
 		while (app_data->map[x][++y])
 		{
-			app_data->map[x][y]->projection = ft_calloc(1, sizeof(t_2d_point));
-			app_data->map[x][y]->projection = isometric_transform(app_data->map[x][y],
-					scale);
+			app_data->map[x][y]->projection = isometric_transform(
+					app_data->map[x][y], scale);
 			apply_offset(app_data->map[x][y]->projection, scale
 				* y_scale / WIDTH / 2, scale * x_scale / HEIGHT / 2);
 		}
