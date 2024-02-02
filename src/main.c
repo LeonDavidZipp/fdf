@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 13:02:45 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 15:04:19 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(app_data->mlx, esc_hook, app_data);
 	mlx_loop(app_data->mlx);
 	mlx_terminate(app_data->mlx);
+	free_app_data(app_data);
 	return (0);
 }
 

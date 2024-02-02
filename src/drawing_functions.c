@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 13:22:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 15:00:50 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	apply_offset(t_2d_point *point, double scale,
 	double	x_offset;
 	double	y_offset;
 
-	x_offset = scale * x_scale / HEIGHT / 2 + 400;
-	y_offset = scale * y_scale / WIDTH / 2 + 10;
+	x_offset = scale * x_scale / HEIGHT / 2 + 500;
+	y_offset = scale * y_scale / WIDTH / 2 + 100;
 	point->x += x_offset;
 	point->y += y_offset;
 }
