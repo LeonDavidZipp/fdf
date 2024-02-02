@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 12:06:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 12:07:20 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *image)
 		err = -dy / 2;
 	x = start->x;
 	y = start->y;
-	// printf("width %d height %d\n", image->width, image->height);
-	// while (x <= (uint32_t)end->x && y <= (uint32_t)end->y)
 	while (true)
 	{
 		if (sx > 0 && x > (uint32_t)end->x)
