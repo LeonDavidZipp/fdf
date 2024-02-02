@@ -58,3 +58,6 @@ test_maps
 *.fdf
 .vscode
 *.yaml
+LeakSanitizer
+.devcontainer
+docker-compose.yml
