@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/01 18:26:45 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 12:47:03 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_matrix(double **matrix)
 	int			i;
 
 	i = -1;
-	while (++i < 3)
+	while (++i < 3 && matrix[i])
 		free(matrix[i]);
 	free(matrix);
 }

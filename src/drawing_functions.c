@@ -6,17 +6,22 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 12:07:20 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 12:46:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#include <stdio.h>
 
-static void	apply_offset(t_2d_point *point, double x_offset, double y_offset)
+static void	apply_offset(t_2d_point *point, double scale,
+	double x_scale, double y_scale)
 {
-	point->x += x_offset + 300;
-	point->y += y_offset + 100;
+	double	x_offset;
+	double	y_offset;
+
+	x_offset = scale * x_scale / HEIGHT / 2 + 300;
+	y_offset = scale * y_scale / WIDTH / 2 + 100;
+	point->x += x_offset;
+	point->y += y_offset;
 }
 
 static void	map_3d_to_2d(t_app_data *app_data)
@@ -40,77 +45,65 @@ static void	map_3d_to_2d(t_app_data *app_data)
 		{
 			app_data->map[x][y]->projection = isometric_transform(
 					app_data->map[x][y], scale);
-			apply_offset(app_data->map[x][y]->projection, scale
-				* y_scale / WIDTH / 2, scale * x_scale / HEIGHT / 2);
+			apply_offset(app_data->map[x][y]->projection, scale,
+				x_scale, y_scale);
 		}
-		y = 0;
-		while (app_data->map[x][y] && app_data->map[x][y]->projection != NULL)
-		{
-			printf("x %d y %d projection_x %f projection_y %f\n\n", x, y,
-				app_data->map[x][y]->projection->x,
-				app_data->map[x][y]->projection->y);
-			y++;
-		}
-		printf("image width %d height %d\n", app_data->image->width,
-			app_data->image->height);
 	}
+}
+
+t_line	*init_line(t_2d_point *start, t_2d_point *end)
+{
+	t_line	*line;
+
+	line = ft_calloc(1, sizeof(t_line));
+	if (!line)
+		return (NULL);
+	line->dx = fabs(end->x - start->x);
+	line->dy = fabs(end->y - start->y);
+	if (start->x < end->x)
+		line->sx = 1;
+	else
+		line->sx = -1;
+	if (start->y < end->y)
+		line->sy = 1;
+	else
+		line->sy = -1;
+	if (line->dx > line->dy)
+		line->err = line->dx / 2;
+	else
+		line->err = -(line->dy / 2);
+	line->x = start->x;
+	line->y = start->y;
+	return (line);
 }
 
 void	draw_line(t_2d_point *start, t_2d_point *end, mlx_image_t *image)
 {
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
-	int			err;
-	int			e2;
-	uint32_t	x;
-	uint32_t	y;
+	t_line		*line;
 
-	dx = fabs(end->x - start->x);
-	dy = fabs(end->y - start->y);
-	if (start->x < end->x)
-		sx = 1;
-	else
-		sx = -1;
-	if (start->y < end->y)
-		sy = 1;
-	else
-		sy = -1;
-	if (dx > dy)
-		err = dx / 2;
-	else
-		err = -dy / 2;
-	x = start->x;
-	y = start->y;
+	line = init_line(start, end);
 	while (true)
 	{
-		if (sx > 0 && x > (uint32_t)end->x)
+		if ((line->sx > 0 && line->x > (uint32_t)end->x)
+			|| (line->sx <= 0 && line->x < (uint32_t)end->x)
+			|| (line->sy > 0 && line->y > (uint32_t)end->y)
+			|| (line->sy <= 0 && line->y < (uint32_t)end->y))
 			break ;
-		if (sx <= 0 && x < (uint32_t)end->x)
-			break ;
-		if (sy > 0 && y > (uint32_t)end->y)
-			break ;
-		if (sy <= 0 && y < (uint32_t)end->y)
-			break ;
-		// printf("x %d y %d\n", x, y);
-		if (x <= image->width && y <= image->height)
-			mlx_put_pixel(image, y, x, start->color);
-		e2 = err;
-		// printf("e2 %d -dx %d\n", e2, -dx);
-		if (e2 > -dx)
+		if (line->x <= image->width && line->y <= image->height)
+			mlx_put_pixel(image, line->y, line->x, start->color);
+		line->e2 = line->err;
+		if (line->e2 > -line->dx)
 		{
-			err -= dy;
-			x += sx;
+			line->err -= line->dy;
+			line->x += line->sx;
 		}
-		// printf("e2 %d dy %d\n", e2, dy);
-		if (e2 < dy)
+		if (line->e2 < line->dy)
 		{
-			err += dx;
-			y += sy;
+			line->err += line->dx;
+			line->y += line->sy;
 		}
-		// break ;
 	}
+	free(line);
 }
 
 void	draw_map(t_app_data *a_d)

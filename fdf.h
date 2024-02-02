@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 11:35:53 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 12:43:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ typedef struct s_3d_point
 	t_2d_point	*projection;
 }				t_3d_point;
 
+typedef struct s_line
+{
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			err;
+	int			e2;
+	uint32_t	x;
+	uint32_t	y;
+}				t_line;
+
 typedef struct s_app_data
 {
 	mlx_t		*mlx;
@@ -69,7 +81,6 @@ void			free_map(t_3d_point ***map);
 void			free_app_data(t_app_data *app_data);
 
 // gui
-// mlx_t			*make_window(t_app_data *app_data);
 mlx_t			*make_window(void);
 void			draw_map(t_app_data *app_data);
 
