@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 18:52:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 20:54:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ typedef struct s_3d_point
 
 typedef struct s_line
 {
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
-	int			err;
-	int			e2;
+	double		dx;
+	double		dy;
+	double		sx;
+	double		sy;
+	double		err;
+	double		e2;
 	uint32_t	x;
 	uint32_t	y;
 }				t_line;
