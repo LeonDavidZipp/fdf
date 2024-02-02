@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:31:55 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 16:31:14 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 19:57:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static t_3d_point	*multiply_projection1(t_3d_point *point)
 			* point->y + projection1[1][2] * point->z);
 	result->z = 1 / sqrt(6) * (projection1[2][0] * point->x + projection1[2][1]
 			* point->y + projection1[2][2] * point->z);
-	result->color = point->color;
 	free_matrix(projection1);
 	return (result);
 }
@@ -98,11 +97,11 @@ t_2d_point	*isometric_transform(t_3d_point *point, double scale)
 		free_matrix(projection2);
 		return (NULL);
 	}
-	result->x =scale * (projection2[0][0] * temp->x + projection2[0][1]
+	result->x = scale * (projection2[0][0] * temp->x + projection2[0][1]
 			* temp->y + projection2[0][2] * temp->z);
 	result->y = scale * (projection2[1][0] * temp->x + projection2[1][1]
 			* temp->y + projection2[1][2] * temp->z);
-	result->color = temp->color;
+	result->color = point->color;
 	free(temp);
 	free_matrix(projection2);
 	return (result);

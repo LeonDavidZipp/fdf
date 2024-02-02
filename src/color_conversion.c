@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:01:00 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 16:43:50 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 19:53:32 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static int	check_hex(char *hex_char)
 	return (0);
 }
 
-int	ft_hex_to_int(char *hex_char)
+uint32_t	ft_hex_to_int(char *hex_char)
 {
-	int		len;
-	int		result;
-	int		power;
+	int				len;
+	uint32_t		result;
+	uint32_t		power;
 
 	if (check_hex(hex_char) == 1)
 		return (-1);
@@ -54,20 +54,7 @@ int	ft_hex_to_int(char *hex_char)
 			return (-1);
 		power *= 16;
 	}
+	result = result << 8;
+	result += 0xFF;
 	return (result);
 }
-
-// int	int_to_r(int hex)
-// {
-// 	return ((hex >> 16) & 0xFF);
-// }
-
-// int	int_to_g(int hex)
-// {
-// 	return ((hex >> 8) & 0xFF);
-// }
-
-// int	int_to_b(int hex)
-// {
-// 	return (hex & 0xFF);
-// }

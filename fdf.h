@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 16:56:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/02 18:52:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 // defines
 # define WIDTH 1080
 # define HEIGHT 1080
-# define WHITE 0xAAFF00
+# define WHITE 0xFFFFFFFF
 
 // structs
 typedef struct s_2d_point
 {
 	double		x;
 	double		y;
-	int			color;
+	uint32_t	color;
 }				t_2d_point;
 
 typedef struct s_3d_point
@@ -38,7 +38,7 @@ typedef struct s_3d_point
 	double		x;
 	double		y;
 	double		z;
-	int			color;
+	uint32_t	color;
 	t_2d_point	*projection;
 }				t_3d_point;
 
@@ -64,10 +64,10 @@ typedef struct s_app_data
 	int			window_height;
 }				t_app_data;
 
-int				ft_hex_to_int(char *hex_char);
-int				int_to_r(int hex);
-int				int_to_g(int hex);
-int				int_to_b(int hex);
+uint32_t		ft_hex_to_int(char *hex_char);
+// int				int_to_r(int hex);
+// int				int_to_g(int hex);
+// int				int_to_b(int hex);
 
 // map generation functions
 t_3d_point		***make_map(int fd);
