@@ -61,3 +61,4 @@ test_maps
 LeakSanitizer
 .devcontainer
 docker-compose.yml
+.DS_Store
