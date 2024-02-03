@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 11:32:23 by lzipp             #+#    #+#             */
-/*   Updated: 2023/10/31 11:40:59 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/03 11:50:50 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_count_words(const char *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if ((i == 0 && s[i] != c) || (s[i] != c && s[i - 1] == c)) 
+		if ((i == 0 && s[i] != c) || (s[i] != c && s[i - 1] == c))
 			count++;
 		i++;
 	}
