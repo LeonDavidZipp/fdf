@@ -6,14 +6,14 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:42:09 by lzipp             #+#    #+#              #
-#    Updated: 2024/02/02 21:01:51 by lzipp            ###   ########.fr        #
+#    Updated: 2024/02/03 12:02:55 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= fdf
 
 cc := gcc
-LDFLAGS := -L /Users/lzipp/Desktop/42curriculum/fdf/LeakSanitizer -llsan -lc++
+# LDFLAGS := -L /Users/lzipp/Desktop/42curriculum/fdf/LeakSanitizer -llsan -lc++
 CFLAGS	:= -Wextra -Wall -Werror
 
 LIBMLX	:= ./lib/MLX42
@@ -21,7 +21,8 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 GETNEXTLINEDIR	:= ./lib/get_next_line
-GETNEXTLINESOURCES = $(GETNEXTLINEDIR)/get_next_line.c $(GETNEXTLINEDIR)/get_next_line_utils.c
+GETNEXTLINESOURCES = $(GETNEXTLINEDIR)/get_next_line.c \
+$(GETNEXTLINEDIR)/get_next_line_utils.c
 GETNEXTLINEOBJECTS = $(GETNEXTLINESOURCES:.c=.o)
 
 SOURCEDIR	:= ./src
@@ -95,8 +96,8 @@ libmlx:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): libft $(OBJECTS)
-	@$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT) $(LDFLAGS)
-#@$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT)
+	@$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT)
+# @$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT) $(LDFLAGS)
 
 clean:
 	@make -C ./lib/libft clean
