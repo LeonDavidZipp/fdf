@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/05 12:07:54 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/05 12:09:40 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	fd = check_valid_and_open(argc, argv);
 	app_data = init_app_data(fd);
 	close(fd);
-	write(1, "Press ESC to exit\n", 18);
 	draw_map(app_data);
 	mlx_loop_hook(app_data->mlx, esc_hook, app_data);
 	mlx_loop(app_data->mlx);
