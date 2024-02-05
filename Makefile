@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:42:09 by lzipp             #+#    #+#              #
-#    Updated: 2024/02/05 11:57:59 by lzipp            ###   ########.fr        #
+#    Updated: 2024/02/05 16:38:50 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ $(SOURCEDIR)/color_conversion.c \
 $(SOURCEDIR)/drawing_functions.c \
 $(SOURCEDIR)/isometric_transform.c \
 $(SOURCEDIR)/check_map_valid.c \
+$(SOURCEDIR)/map_3d_to_2d.c \
 $(SOURCEDIR)/main.c
 OBJECTS	:= ${SOURCES:.c=.o} $(GETNEXTLINEOBJECTS)
 
