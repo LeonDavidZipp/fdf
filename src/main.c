@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:26:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/02 17:07:52 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/05 12:07:54 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	fd = check_valid_and_open(argc, argv);
 	app_data = init_app_data(fd);
 	close(fd);
+	write(1, "Press ESC to exit\n", 18);
 	draw_map(app_data);
 	mlx_loop_hook(app_data->mlx, esc_hook, app_data);
 	mlx_loop(app_data->mlx);
@@ -39,18 +40,18 @@ static int	check_valid_and_open(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error: Wrong number of arguments.\n", 34);
 		exit(1);
 	}
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".fdf", 4) != 0)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error: Wrong file type.\n", 24);
 		exit(1);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error: Couldn't open or read from file.\n", 40);
 		exit(1);
 	}
 	return (fd);
@@ -72,6 +73,7 @@ static t_app_data	*init_app_data(int fd)
 			app_data->window_height);
 	app_data->map = make_map(fd);
 	app_data->image = NULL;
+	check_map_valid(app_data);
 	return (app_data);
 }
 
