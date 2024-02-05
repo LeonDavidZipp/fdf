@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/05 16:55:21 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/05 17:17:06 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,6 @@ static void	draw_multiple_dots(t_app_data *a_d)
 	int	x;
 	int	y;
 
-	a_d->image = mlx_new_image(a_d->mlx, a_d->window_width, a_d->window_height);
-	if (!a_d->image)
-	{
-		free_app_data(a_d);
-		exit(1);
-	}
-	map_3d_to_2d(a_d);
 	x = -1;
 	while (a_d->map[++x])
 	{
