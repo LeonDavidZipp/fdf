@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 11:33:36 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/05 16:32:25 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/05 16:35:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		res[i++] = s1[front_i++];
 	return (res);
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-// int	main(void)
-// {
-// 	char *str1 = "lorem \n ipsum \t dolor \n sit \t amet";
-// 	char *str2 = "lorem ipsum dolor sit amet";
-// 	char *str3 = "";
-// 	char *str4 = "stwHellostw";
-// 	char *str5 = "NoSpacesHere";
-// 	char *result1 = ft_strtrim(str1, " ");
-// 	char *result2 = ft_strtrim(str2, "te");
-// 	char *result3 = ft_strtrim(str3, "");
-// 	char *result4 = ft_strtrim(str4, "stw");
-// 	char *result5 = ft_strtrim(str5, "No");
-// 	printf("expected output: \"Hello, World!   n\" | \"%s\"\n", result1);
-// 	printf("expected output: \"12345\" | \"%s\"\n", result2);
-// 	printf("expected output: \"Lorem ipsum\" | \"%s\"\n", result3);
-// 	printf("expected output: \"Hello\" | \"%s\"\n", result4);
-// 	printf("expected output: \"NoSpacesHere\" | \"%s\"\n", result5);
-// 	free(result1);
-// 	free(result2);
-// 	free(result3);
-// 	free(result4);
-// 	free(result5);
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:20:46 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/03 11:59:48 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/05 16:41:20 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_app_data
 
 uint32_t		ft_hex_to_int(char *hex_char);
 t_3d_point		***make_map(int fd);
+void			map_3d_to_2d(t_app_data *app_data);
+void			check_map_valid(t_app_data *app_data);
 t_2d_point		*isometric_transform(t_3d_point *point, double scale);
 void			free_values(char **values);
 void			free_map(t_3d_point ***map);
