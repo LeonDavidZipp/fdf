@@ -6,14 +6,14 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:42:09 by lzipp             #+#    #+#              #
-#    Updated: 2024/02/05 16:59:27 by lzipp            ###   ########.fr        #
+#    Updated: 2024/02/05 17:29:20 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= fdf
 
 cc := gcc
-LDFLAGS := -L /Users/lzipp/Desktop/42curriculum/fdf/LeakSanitizer -llsan -lc++
+# LDFLAGS := -L /Users/lzipp/Desktop/42curriculum/fdf/LeakSanitizer -llsan -lc++
 CFLAGS	:= -Wextra -Wall -Werror
 
 LIBMLX	:= ./lib/MLX42
@@ -98,8 +98,8 @@ libmlx:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): libft $(OBJECTS)
-	@$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT) $(LDFLAGS)
-# @$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT)
+	@$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT)
+# @$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFT) $(LDFLAGS)
 
 clean:
 	@make -C ./lib/libft clean
