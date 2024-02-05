@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:11:12 by lzipp             #+#    #+#             */
-/*   Updated: 2024/02/05 17:17:06 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/02/05 17:51:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,11 @@ static t_line	*init_line(t_2d_point *start, t_2d_point *end)
 
 static void	draw_one_dot(t_2d_point *point, mlx_image_t *img)
 {
-	if (point->x <= img->height && point->y <= img->width)
-		mlx_put_pixel(img, point->y, point->x, point->color);
-	if (point->x + 1 <= img->height && point->y <= img->width)
-		mlx_put_pixel(img, point->y, point->x + 1, point->color);
-	if (point->x <= img->height && point->y + 1 <= img->width)
-		mlx_put_pixel(img, point->y + 1, point->x, point->color);
-	if (point->x - 1 <= img->height && point->y <= img->width)
-		mlx_put_pixel(img, point->y, point->x - 1, point->color);
-	if (point->x <= img->height && point->y - 1 <= img->width)
-		mlx_put_pixel(img, point->y - 1, point->x, point->color);
+	mlx_put_pixel(img, 200, 200, point->color);
+	mlx_put_pixel(img, 201, 200, point->color);
+	mlx_put_pixel(img, 199, 200, point->color);
+	mlx_put_pixel(img, 200, 201, point->color);
+	mlx_put_pixel(img, 200, 199, point->color);
 }
 
 static void	draw_multiple_dots(t_app_data *a_d)
